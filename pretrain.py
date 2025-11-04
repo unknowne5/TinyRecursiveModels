@@ -17,7 +17,12 @@ import coolname
 import hydra
 import pydantic
 from omegaconf import DictConfig
-from adam_atan2 import AdamATan2
+try:
+    from adam_atan2 import AdamATan2
+except ImportError:
+    print("Failed to import AdamATan2. Using AdamW instead")
+
+LOG_EVERY_N_STEPS = 10
 
 from puzzle_dataset import PuzzleDataset, PuzzleDatasetConfig, PuzzleDatasetMetadata
 from utils.functions import load_model_class, get_model_source_path
@@ -113,7 +118,7 @@ def create_dataloader(config: PretrainConfig, split: str, rank: int, world_size:
     return dataloader, dataset.metadata
 
 
-def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, rank: int, world_size: int):
+def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, rank: int, world_size: int, device: str = "cuda"):
     model_cfg = dict(
         **config.arch.__pydantic_extra__,  # type: ignore
         batch_size=config.global_batch_size // world_size,
@@ -127,12 +132,14 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
     model_cls = load_model_class(config.arch.name)
     loss_head_cls = load_model_class(config.arch.loss.name)
 
-    with torch.device("cuda"):
+    with torch.device(device):
         model: nn.Module = model_cls(model_cfg)
         print(model)
         model = loss_head_cls(model, **config.arch.loss.__pydantic_extra__)  # type: ignore
-        if "DISABLE_COMPILE" not in os.environ:
+        if "DISABLE_COMPILE" not in os.environ and device == "cuda":
             model = torch.compile(model)  # type: ignore
+        elif device != "cuda":
+            print(f"Skipping torch.compile on {device} device (not fully supported)")
 
         # Load checkpoint
         if rank == 0:
@@ -146,14 +153,22 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
 
     # Optimizers and lr
     if config.arch.puzzle_emb_ndim == 0:
-        optimizers = [
-            AdamATan2(
+        try:
+            optimizer = AdamATan2(
                 model.parameters(),
                 lr=0,  # Needs to be set by scheduler
                 weight_decay=config.weight_decay,
                 betas=(config.beta1, config.beta2)
             )
-        ]
+        except NameError:
+            optimizer = torch.optim.AdamW(
+                model.parameters(),
+                lr=0,  # Needs to be set by scheduler
+                weight_decay=config.weight_decay,
+                betas=(config.beta1, config.beta2)
+            )
+        optimizers = [optimizer]
+
         optimizer_lrs = [
             config.lr
         ]
@@ -170,6 +185,20 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
             config.puzzle_emb_lr
         ]
     else:
+        try:
+            optimizer = AdamATan2(
+                model.parameters(),
+                lr=0,  # Needs to be set by scheduler
+                weight_decay=config.weight_decay,
+                betas=(config.beta1, config.beta2)
+            )
+        except NameError:
+            optimizer = torch.optim.AdamW(
+                model.parameters(),
+                lr=0,  # Needs to be set by scheduler
+                weight_decay=config.weight_decay,
+                betas=(config.beta1, config.beta2)
+            )
         optimizers = [
             CastedSparseEmbeddingSignSGD_Distributed(
                 model.model.puzzle_emb.buffers(),  # type: ignore
@@ -177,12 +206,7 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
                 weight_decay=config.puzzle_emb_weight_decay,
                 world_size=world_size
             ),
-            AdamATan2(
-                model.parameters(),
-                lr=0,  # Needs to be set by scheduler
-                weight_decay=config.weight_decay,
-                betas=(config.beta1, config.beta2)
-            )
+            optimizer
         ]
         optimizer_lrs = [
             config.puzzle_emb_lr,
@@ -214,12 +238,12 @@ def cosine_schedule_with_warmup_lr_lambda(
     return base_lr * (min_ratio + max(0.0, (1 - min_ratio) * 0.5 * (1.0 + math.cos(math.pi * float(num_cycles) * 2.0 * progress))))
 
 
-def init_train_state(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, rank: int, world_size: int):
+def init_train_state(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, rank: int, world_size: int, device: str = "cuda") -> TrainState:
     # Estimated total training steps
     total_steps = int(config.epochs * train_metadata.total_groups * train_metadata.mean_puzzle_examples / config.global_batch_size)
 
     # Model
-    model, optimizers, optimizer_lrs = create_model(config, train_metadata, rank=rank, world_size=world_size)
+    model, optimizers, optimizer_lrs = create_model(config, train_metadata, rank=rank, world_size=world_size, device=device)
 
     return TrainState(
         step=0,
@@ -241,12 +265,12 @@ def save_train_state(config: PretrainConfig, train_state: TrainState):
     torch.save(train_state.model.state_dict(), os.path.join(config.checkpoint_path, f"step_{train_state.step}"))
 
 
-def load_checkpoint(model: nn.Module, config: PretrainConfig):
+def load_checkpoint(model: nn.Module, config: PretrainConfig, device: str = "cuda"):
     if config.load_checkpoint is not None:
         print(f"Loading checkpoint {config.load_checkpoint}")
 
         # Load state dict
-        state_dict = torch.load(config.load_checkpoint, map_location="cuda")
+        state_dict = torch.load(config.load_checkpoint, map_location=device)
 
         # Resize and reset puzzle emb if needed
         puzzle_emb_name = "_orig_mod.model.inner.puzzle_emb.weights"
@@ -286,21 +310,47 @@ def create_evaluators(config: PretrainConfig, eval_metadata: PuzzleDatasetMetada
 
     return evaluators
 
-def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, global_batch_size: int, rank: int, world_size: int):
+def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, global_batch_size: int, rank: int, world_size: int, device: str = "cuda"):
     train_state.step += 1
     if train_state.step > train_state.total_steps:  # At most train_total_steps
         return
 
     # To device
-    batch = {k: v.cuda() for k, v in batch.items()}
+    batch = {k: v.to(device) for k, v in batch.items()}
 
     # Init carry if it is None
     if train_state.carry is None:
-        with torch.device("cuda"):
+        with torch.device(device):
             train_state.carry = train_state.model.initial_carry(batch)  # type: ignore
 
     # Forward
     train_state.carry, loss, metrics, _, _ = train_state.model(carry=train_state.carry, batch=batch, return_keys=[])
+
+    # DEBUG: Check for NaN/Inf in forward pass
+    if torch.isnan(loss) or torch.isinf(loss):
+        print(f"WARNING: Loss is NaN/Inf at step {train_state.step}")
+        print(f"Loss value: {loss.item()}")
+        
+        # Check model parameters
+        for name, param in train_state.model.named_parameters():
+            if param is not None:
+                if torch.isnan(param).any():
+                    print(f"  NaN in parameter: {name}, shape: {param.shape}")
+                if torch.isinf(param).any():
+                    print(f"  Inf in parameter: {name}, shape: {param.shape}")
+                param_max = param.abs().max().item()
+                if param_max > 1e6:
+                    print(f"  Large parameter: {name}, max abs value: {param_max}")
+        
+        # Check gradients before backward
+        print("Checking carry state:")
+        if train_state.carry is not None:
+            for k, v in train_state.carry.items():
+                if torch.isnan(v).any():
+                    print(f"  NaN in carry[{k}]")
+                if torch.isinf(v).any():
+                    print(f"  Inf in carry[{k}]")
+        assert False, "Aborting training due to NaN/Inf loss."
 
     ((1 / global_batch_size) * loss).backward()
 
@@ -312,12 +362,14 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
             
     # Apply optimizer
     lr_this_step = None    
+    torch.nn.utils.clip_grad_norm_(train_state.model.parameters(), max_norm=1.0)
+
     for optim, base_lr in zip(train_state.optimizers, train_state.optimizer_lrs):
         lr_this_step = compute_lr(base_lr, config, train_state)
-
+        print(f'Setting optimizer lr to {lr_this_step} at step {train_state.step}')
         for param_group in optim.param_groups:
             param_group['lr'] = lr_this_step
-            
+
         optim.step()
         optim.zero_grad()
 
@@ -351,6 +403,7 @@ def evaluate(
     rank: int,
     world_size: int,
     cpu_group: Optional[dist.ProcessGroup],
+    device: str = "cuda"
 ):
     reduced_metrics = None
 
@@ -377,8 +430,8 @@ def evaluate(
                 print(f"Processing batch {processed_batches}: {set_name}")
             
             # To device
-            batch = {k: v.cuda() for k, v in batch.items()}
-            with torch.device("cuda"):
+            batch = {k: v.to(device) for k, v in batch.items()}
+            with torch.device(device):
                 carry = train_state.model.initial_carry(batch)  # type: ignore
 
             # Forward
@@ -414,7 +467,7 @@ def evaluate(
                     sorted(metrics.keys())
                 )  # Sort keys to guarantee all processes use the same order.
                 metric_values = torch.zeros(
-                    (len(set_ids), len(metrics.values())), dtype=torch.float32, device="cuda"
+                    (len(set_ids), len(metrics.values())), dtype=torch.float32, device=device
                 )
 
             metric_values[set_id] += torch.stack([metrics[k] for k in metric_keys])
@@ -538,21 +591,37 @@ def launch(hydra_config: DictConfig):
     WORLD_SIZE = 1
     CPU_PROCESS_GROUP = None
 
+    if torch.cuda.is_available():
+        DEVICE = "cuda"
+        torch.set_default_dtype(torch.float32)
+    elif torch.backends.mps.is_available():
+        DEVICE = "mps"  # Apple Silicon
+        torch.set_default_dtype(torch.float32)
+    else:
+        DEVICE = "cpu"
+        torch.set_default_dtype(torch.float32)
+    
+    print(f"Using device: {DEVICE}")
+
     # Initialize distributed training if in distributed environment (e.g. torchrun)
     if "LOCAL_RANK" in os.environ:
-        # Initialize distributed, default device and dtype
-        dist.init_process_group(backend="nccl")
+        if DEVICE != "cuda":
+            print("WARNING: Distributed training only supported on CUDA. Running single process.")
+            os.environ.pop("LOCAL_RANK", None)
+        else:
+            # Initialize distributed, default device and dtype
+            dist.init_process_group(backend="nccl")
 
-        RANK = dist.get_rank()
-        WORLD_SIZE = dist.get_world_size()
+            RANK = dist.get_rank()
+            WORLD_SIZE = dist.get_world_size()
 
-        torch.cuda.set_device(int(os.environ["LOCAL_RANK"]))
-        
-        # CPU GLOO process group
-        CPU_PROCESS_GROUP = dist.new_group(backend="gloo")
-        assert (
-            dist.get_rank(CPU_PROCESS_GROUP) == RANK and dist.get_world_size(CPU_PROCESS_GROUP) == WORLD_SIZE
-        )
+            torch.cuda.set_device(int(os.environ["LOCAL_RANK"]))
+            
+            # CPU GLOO process group
+            CPU_PROCESS_GROUP = dist.new_group(backend="gloo")
+            assert (
+                dist.get_rank(CPU_PROCESS_GROUP) == RANK and dist.get_world_size(CPU_PROCESS_GROUP) == WORLD_SIZE
+            )
 
     # Load sync'ed config
     config = load_synced_config(hydra_config, rank=RANK, world_size=WORLD_SIZE)
@@ -580,7 +649,7 @@ def launch(hydra_config: DictConfig):
         evaluators = []
 
     # Train state
-    train_state = init_train_state(config, train_metadata, rank=RANK, world_size=WORLD_SIZE)
+    train_state = init_train_state(config, train_metadata, rank=RANK, world_size=WORLD_SIZE, device=DEVICE)
 
     # Progress bar and logger
     progress_bar = None
@@ -604,13 +673,19 @@ def launch(hydra_config: DictConfig):
             print("TRAIN")
         train_state.model.train()
         for set_name, batch, global_batch_size in train_loader:
-            metrics = train_batch(config, train_state, batch, global_batch_size, rank=RANK, world_size=WORLD_SIZE)
+            metrics = train_batch(config, train_state, batch, global_batch_size, rank=RANK, world_size=WORLD_SIZE, device=DEVICE)
 
             if RANK == 0 and metrics is not None:
-                wandb.log(metrics, step=train_state.step)
-                progress_bar.update(train_state.step - progress_bar.n)  # type: ignore
+                wandb.log(metrics, step=train_state.step, commit=False)
+                print(f'Logging training metrics at step {train_state.step}')
+                print(metrics)
+                # progress_bar.update(train_state.step - progress_bar.n)  # type: ignore
             if config.ema:
                 ema_helper.update(train_state.model)
+
+            for k, v in metrics.items():
+                if k.startswith("train/"):
+                    print(f"Training Metric - {k}: {v}")
 
         if _iter_id >= config.min_eval_interval:
             ############ Evaluation
@@ -630,11 +705,32 @@ def launch(hydra_config: DictConfig):
                 evaluators,
                 rank=RANK, 
                 world_size=WORLD_SIZE,
-                cpu_group=CPU_PROCESS_GROUP)
+                cpu_group=CPU_PROCESS_GROUP,
+                device=DEVICE)
 
             if RANK == 0 and metrics is not None:
-                wandb.log(metrics, step=train_state.step)
+                print(f'Logging evaluation metrics at step {train_state.step}')
+                print(metrics)
+                wandb_metrics = {}
+                for key, value in metrics.items():
+                    if isinstance(value, dict):
+                        wandb_metrics[key] = {
+                            k: float(v) if hasattr(v, 'item') else v 
+                            for k, v in value.items()
+                        }
+                    else:
+                        wandb_metrics[key] = float(value) if hasattr(value, 'item') else value
+                                
+                # Flatten nested dict for wandb
+                flat_metrics = {}
+                for set_name, set_metrics in wandb_metrics.items():
+                    for metric_name, metric_value in set_metrics.items():
+                        flat_metrics[f"eval/{metric_name}"] = metric_value
                 
+                print(f"Logging evaluation metrics at step {train_state.step}")
+                print(f"Metrics to log: {flat_metrics}")
+
+                wandb.log(flat_metrics, step=train_state.step, commit=True)
             ############ Checkpointing
             if RANK == 0:
                 print("SAVE CHECKPOINT")
