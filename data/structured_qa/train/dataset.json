@@ -2,7 +2,7 @@
   "pad_id": 0,
   "ignore_label_id": 0,
   "blank_identifier_id": 0,
-  "vocab_size": 35,
+  "vocab_size": 36,
   "seq_len": 48,
   "num_puzzle_identifiers": 1,
   "total_groups": 8000,

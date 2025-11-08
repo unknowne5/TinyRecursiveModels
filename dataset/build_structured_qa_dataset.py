@@ -25,7 +25,7 @@ class QADatasetConfig(BaseModel):
     num_train_puzzles: int = 8000
     num_test_puzzles: int = 1500
     seed: int = 42
-    vocab_size: int = 35  # Special (4) + Numbers (10) + Questions (11) + Words (10) = 35
+    vocab_size: int = 36  # Special (4) + Numbers (10) + Questions (12) + Words (10) = 36
     min_sentence_words: int = 5
     max_sentence_words: int = 10
 
@@ -34,7 +34,7 @@ class QADatasetConfig(BaseModel):
 
 def get_question_words():
     """Returns a list of all words used in question templates."""
-    return sorted(list(set("what is the word in the sentence how many words are after".split())))
+    return sorted(list(set("what is the word in the sentence how many words are after first".split())))
 
 def build_vocabulary(vocab_size: int) -> Tuple[Dict[str, int], Dict[int, str]]:
     """Builds a vocabulary with single-digit numbers and specific words."""
@@ -78,6 +78,15 @@ def qa_template_count_words(sentence: List[str]) -> Tuple[str, str]:
     return question, answer
 
 
+def qa_template_find_first_n_words(sentence: List[str]) -> Tuple[str, str]:
+    """Q&A for finding the first N words."""
+    if len(sentence) < 2:
+        return qa_template_find_nth_word(sentence) # Fallback
+    n = random.randint(2, min(4, len(sentence))) # Ask for 2, 3, or 4 words
+    question = f"what are the first {n} words in the sentence ?"
+    answer = " ".join(sentence[:n])
+    return question, answer
+
 def qa_template_find_next_word(sentence: List[str]) -> Tuple[str, str]:
     """Q&A for finding the word that follows another."""
     if len(sentence) < 2:
@@ -94,6 +103,7 @@ QA_TEMPLATES = [
     qa_template_find_nth_word,
     qa_template_count_words,
     qa_template_find_next_word,
+    qa_template_find_first_n_words,
 ]
 
 
@@ -127,9 +137,9 @@ def encode_and_pad(
     padded_input[:input_len-1] = input_ids[:input_len-1]
     padded_input[input_len-1] = token_to_id["[EOS]"]
 
-    padded_labels = np.full(max_len, 0, dtype=np.int32)
-    label_len = min(len(label_ids), max_len - input_len)
-    padded_labels[input_len : input_len + label_len] = label_ids[:label_len]
+    padded_labels = np.full(max_len, token_to_id["[PAD]"], dtype=np.int32)
+    label_len = min(len(label_ids), max_len)
+    padded_labels[:label_len] = label_ids[:label_len]
 
     return padded_input, padded_labels
 
@@ -194,7 +204,7 @@ def generate_dataset(config: QADatasetConfig, split: str, token_to_id: Dict[str,
         
     metadata = PuzzleDatasetMetadata(
         seq_len=config.max_seq_len, vocab_size=len(token_to_id), pad_id=token_to_id["[PAD]"],
-        ignore_label_id=0, blank_identifier_id=0, num_puzzle_identifiers=1,
+        ignore_label_id=token_to_id["[PAD]"], blank_identifier_id=0, num_puzzle_identifiers=1,
         total_puzzles=num_puzzles, mean_puzzle_examples=1, total_groups=num_puzzles, sets=["all"]
     )
     
