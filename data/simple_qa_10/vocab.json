@@ -1,0 +1,26 @@
+{
+  "token_to_id": {
+    "[PAD]": 0,
+    "[EOS]": 1,
+    "[SEP]": 2,
+    "[UNK]": 3,
+    "word0": 4,
+    "word1": 5,
+    "word2": 6,
+    "word3": 7,
+    "word4": 8,
+    "word5": 9
+  },
+  "id_to_token": {
+    "0": "[PAD]",
+    "1": "[EOS]",
+    "2": "[SEP]",
+    "3": "[UNK]",
+    "4": "word0",
+    "5": "word1",
+    "6": "word2",
+    "7": "word3",
+    "8": "word4",
+    "9": "word5"
+  }
+}

@@ -1,0 +1,500 @@
+--- Example 0 ---
+Sentence: word0 word5 word2 word4 word3
+Question: what is the 1th word in the sentence ?
+Answer:   word0
+
+--- Example 1 ---
+Sentence: word5 word4 word0 word2 word1
+Question: what is the 1th word in the sentence ?
+Answer:   word5
+
+--- Example 2 ---
+Sentence: word1 word5 word0
+Question: what is the word after word1 in the sentence ?
+Answer:   word5
+
+--- Example 3 ---
+Sentence: word5 word4 word3 word0 word1
+Question: what is the word after word3 in the sentence ?
+Answer:   word0
+
+--- Example 4 ---
+Sentence: word1 word3 word2
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 5 ---
+Sentence: word1 word2 word0
+Question: what is the 2th word in the sentence ?
+Answer:   word2
+
+--- Example 6 ---
+Sentence: word2 word5 word4
+Question: what is the 3th word in the sentence ?
+Answer:   word4
+
+--- Example 7 ---
+Sentence: word4 word0 word3 word5
+Question: what is the word after word0 in the sentence ?
+Answer:   word3
+
+--- Example 8 ---
+Sentence: word4 word2 word1 word5 word0
+Question: what is the 2th word in the sentence ?
+Answer:   word2
+
+--- Example 9 ---
+Sentence: word0 word1 word5 word4
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 10 ---
+Sentence: word5 word2 word1 word3
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 11 ---
+Sentence: word5 word2 word0
+Question: what is the word after word5 in the sentence ?
+Answer:   word2
+
+--- Example 12 ---
+Sentence: word5 word1 word4 word3 word2
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 13 ---
+Sentence: word5 word4 word1 word2 word3
+Question: what is the 2th word in the sentence ?
+Answer:   word4
+
+--- Example 14 ---
+Sentence: word2 word3 word5
+Question: what is the 1th word in the sentence ?
+Answer:   word2
+
+--- Example 15 ---
+Sentence: word5 word2 word1 word4 word3
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 16 ---
+Sentence: word3 word1 word2 word0 word5
+Question: what is the word after word2 in the sentence ?
+Answer:   word0
+
+--- Example 17 ---
+Sentence: word4 word3 word5 word1 word0
+Question: what is the 5th word in the sentence ?
+Answer:   word0
+
+--- Example 18 ---
+Sentence: word0 word5 word4 word3
+Question: what is the word after word0 in the sentence ?
+Answer:   word5
+
+--- Example 19 ---
+Sentence: word3 word4 word0 word1 word2
+Question: what is the word after word1 in the sentence ?
+Answer:   word2
+
+--- Example 20 ---
+Sentence: word2 word4 word0 word5 word3
+Question: what is the word after word0 in the sentence ?
+Answer:   word5
+
+--- Example 21 ---
+Sentence: word2 word0 word5 word1 word4
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 22 ---
+Sentence: word5 word2 word1
+Question: what is the word after word5 in the sentence ?
+Answer:   word2
+
+--- Example 23 ---
+Sentence: word2 word4 word1 word0 word3
+Question: what is the 5th word in the sentence ?
+Answer:   word3
+
+--- Example 24 ---
+Sentence: word0 word4 word2 word1 word5
+Question: what is the 3th word in the sentence ?
+Answer:   word2
+
+--- Example 25 ---
+Sentence: word1 word0 word5 word2
+Question: what is the 1th word in the sentence ?
+Answer:   word1
+
+--- Example 26 ---
+Sentence: word3 word0 word1 word4 word5
+Question: what is the word after word0 in the sentence ?
+Answer:   word1
+
+--- Example 27 ---
+Sentence: word4 word5 word3 word0
+Question: what is the word after word3 in the sentence ?
+Answer:   word0
+
+--- Example 28 ---
+Sentence: word1 word2 word3 word4 word5
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 29 ---
+Sentence: word3 word0 word1 word4 word2
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 30 ---
+Sentence: word4 word5 word1
+Question: what is the word after word4 in the sentence ?
+Answer:   word5
+
+--- Example 31 ---
+Sentence: word0 word5 word1
+Question: what is the 1th word in the sentence ?
+Answer:   word0
+
+--- Example 32 ---
+Sentence: word0 word4 word1 word3
+Question: what is the word after word4 in the sentence ?
+Answer:   word1
+
+--- Example 33 ---
+Sentence: word4 word1 word3
+Question: what is the 2th word in the sentence ?
+Answer:   word1
+
+--- Example 34 ---
+Sentence: word1 word0 word4 word2
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 35 ---
+Sentence: word3 word5 word4 word2
+Question: what is the 1th word in the sentence ?
+Answer:   word3
+
+--- Example 36 ---
+Sentence: word3 word2 word0
+Question: what is the 1th word in the sentence ?
+Answer:   word3
+
+--- Example 37 ---
+Sentence: word4 word3 word1
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 38 ---
+Sentence: word2 word3 word1
+Question: what is the 2th word in the sentence ?
+Answer:   word3
+
+--- Example 39 ---
+Sentence: word0 word5 word4 word3 word2
+Question: what is the 4th word in the sentence ?
+Answer:   word3
+
+--- Example 40 ---
+Sentence: word3 word1 word5 word0
+Question: what is the 4th word in the sentence ?
+Answer:   word0
+
+--- Example 41 ---
+Sentence: word3 word2 word5
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 42 ---
+Sentence: word5 word4 word3 word0
+Question: what is the 3th word in the sentence ?
+Answer:   word3
+
+--- Example 43 ---
+Sentence: word0 word4 word5
+Question: what is the word after word4 in the sentence ?
+Answer:   word5
+
+--- Example 44 ---
+Sentence: word0 word4 word3
+Question: what is the word after word0 in the sentence ?
+Answer:   word4
+
+--- Example 45 ---
+Sentence: word4 word0 word1
+Question: what is the 3th word in the sentence ?
+Answer:   word1
+
+--- Example 46 ---
+Sentence: word5 word1 word3
+Question: what is the 3th word in the sentence ?
+Answer:   word3
+
+--- Example 47 ---
+Sentence: word4 word5 word0
+Question: what is the word after word4 in the sentence ?
+Answer:   word5
+
+--- Example 48 ---
+Sentence: word5 word4 word2 word1
+Question: what is the 3th word in the sentence ?
+Answer:   word2
+
+--- Example 49 ---
+Sentence: word2 word3 word1
+Question: what is the word after word3 in the sentence ?
+Answer:   word1
+
+--- Example 50 ---
+Sentence: word2 word0 word4 word1
+Question: what is the word after word4 in the sentence ?
+Answer:   word1
+
+--- Example 51 ---
+Sentence: word0 word4 word1
+Question: what is the word after word4 in the sentence ?
+Answer:   word1
+
+--- Example 52 ---
+Sentence: word2 word0 word1
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 53 ---
+Sentence: word1 word3 word2 word4
+Question: what is the word after word2 in the sentence ?
+Answer:   word4
+
+--- Example 54 ---
+Sentence: word5 word4 word2
+Question: what is the word after word5 in the sentence ?
+Answer:   word4
+
+--- Example 55 ---
+Sentence: word2 word0 word4
+Question: what is the word after word2 in the sentence ?
+Answer:   word0
+
+--- Example 56 ---
+Sentence: word2 word4 word1 word5
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 57 ---
+Sentence: word5 word2 word3
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 58 ---
+Sentence: word0 word3 word2
+Question: what is the 1th word in the sentence ?
+Answer:   word0
+
+--- Example 59 ---
+Sentence: word1 word2 word5 word4
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 60 ---
+Sentence: word5 word3 word0 word4 word2
+Question: what is the word after word3 in the sentence ?
+Answer:   word0
+
+--- Example 61 ---
+Sentence: word0 word2 word1 word3 word5
+Question: what is the 3th word in the sentence ?
+Answer:   word1
+
+--- Example 62 ---
+Sentence: word0 word2 word1 word4
+Question: what is the 1th word in the sentence ?
+Answer:   word0
+
+--- Example 63 ---
+Sentence: word4 word3 word1 word0
+Question: what is the 2th word in the sentence ?
+Answer:   word3
+
+--- Example 64 ---
+Sentence: word0 word1 word2 word4
+Question: what is the word after word2 in the sentence ?
+Answer:   word4
+
+--- Example 65 ---
+Sentence: word2 word1 word0
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 66 ---
+Sentence: word3 word1 word4
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 67 ---
+Sentence: word2 word1 word4 word0
+Question: what is the word after word2 in the sentence ?
+Answer:   word1
+
+--- Example 68 ---
+Sentence: word2 word5 word0 word1
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 69 ---
+Sentence: word4 word3 word2 word0 word5
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 70 ---
+Sentence: word4 word2 word0
+Question: what is the 3th word in the sentence ?
+Answer:   word0
+
+--- Example 71 ---
+Sentence: word2 word5 word3 word4
+Question: what is the word after word2 in the sentence ?
+Answer:   word5
+
+--- Example 72 ---
+Sentence: word4 word1 word2 word0
+Question: what is the word after word1 in the sentence ?
+Answer:   word2
+
+--- Example 73 ---
+Sentence: word4 word5 word1
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 74 ---
+Sentence: word0 word2 word4 word3
+Question: what is the 3th word in the sentence ?
+Answer:   word4
+
+--- Example 75 ---
+Sentence: word2 word3 word5 word1 word4
+Question: what is the word after word3 in the sentence ?
+Answer:   word5
+
+--- Example 76 ---
+Sentence: word3 word5 word1
+Question: what is the word after word5 in the sentence ?
+Answer:   word1
+
+--- Example 77 ---
+Sentence: word4 word0 word2 word1
+Question: what is the 4th word in the sentence ?
+Answer:   word1
+
+--- Example 78 ---
+Sentence: word4 word2 word3 word1 word5
+Question: what is the word after word2 in the sentence ?
+Answer:   word3
+
+--- Example 79 ---
+Sentence: word3 word1 word0 word4 word2
+Question: what is the 2th word in the sentence ?
+Answer:   word1
+
+--- Example 80 ---
+Sentence: word2 word1 word4 word0 word5
+Question: what is the 2th word in the sentence ?
+Answer:   word1
+
+--- Example 81 ---
+Sentence: word4 word0 word3 word1
+Question: what is the word after word3 in the sentence ?
+Answer:   word1
+
+--- Example 82 ---
+Sentence: word5 word3 word4
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 83 ---
+Sentence: word1 word0 word4
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 84 ---
+Sentence: word1 word4 word3
+Question: what is the 3th word in the sentence ?
+Answer:   word3
+
+--- Example 85 ---
+Sentence: word0 word3 word1
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 86 ---
+Sentence: word4 word5 word2 word1 word3
+Question: what is the word after word1 in the sentence ?
+Answer:   word3
+
+--- Example 87 ---
+Sentence: word5 word3 word4
+Question: how many words are in the sentence ?
+Answer:   3
+
+--- Example 88 ---
+Sentence: word5 word2 word3
+Question: what is the word after word5 in the sentence ?
+Answer:   word2
+
+--- Example 89 ---
+Sentence: word3 word0 word2 word4
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 90 ---
+Sentence: word2 word4 word0 word3
+Question: what is the 2th word in the sentence ?
+Answer:   word4
+
+--- Example 91 ---
+Sentence: word5 word1 word4 word0
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 92 ---
+Sentence: word2 word4 word3 word1
+Question: what is the 2th word in the sentence ?
+Answer:   word4
+
+--- Example 93 ---
+Sentence: word3 word4 word0 word2
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 94 ---
+Sentence: word0 word2 word4 word1
+Question: how many words are in the sentence ?
+Answer:   4
+
+--- Example 95 ---
+Sentence: word5 word4 word1 word3 word0
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 96 ---
+Sentence: word3 word0 word5 word1
+Question: what is the word after word5 in the sentence ?
+Answer:   word1
+
+--- Example 97 ---
+Sentence: word5 word1 word3 word0
+Question: what is the word after word3 in the sentence ?
+Answer:   word0
+
+--- Example 98 ---
+Sentence: word3 word4 word0
+Question: what is the 3th word in the sentence ?
+Answer:   word0
+
+--- Example 99 ---
+Sentence: word1 word3 word5 word0
+Question: how many words are in the sentence ?
+Answer:   4
+
