@@ -1,9 +1,10 @@
 """
-build_qa_dataset.py - Generate a simple algorithmic Q&A dataset.
+build_qa_20_dataset.py - Generate a simple algorithmic Q&A dataset with a small vocab.
 
 This script creates a dataset for tasks like identifying a word's position,
 counting words, or finding a subsequent word in a randomly generated sentence.
 The format is inspired by the Sudoku dataset generator.
+This version uses a small vocabulary of 20 words to simplify the task.
 """
 
 import json
@@ -21,14 +22,14 @@ cli = ArgParser()
 
 
 class QADatasetConfig(BaseModel):
-    output_dir: str = "data/simple_qa"
+    output_dir: str = "data/simple_qa_20"
     max_seq_len: int = 48  # Max length for padded sequences (Q + Sentence + A)
     num_train_puzzles: int = 5000
     num_test_puzzles: int = 1000
     seed: int = 42
-    vocab_size: int = 100  # Number of unique words in the vocabulary
+    vocab_size: int = 20  # Number of unique words in the vocabulary
     min_sentence_words: int = 5
-    max_sentence_words: int = 16
+    max_sentence_words: int = 12 # Reduced to be less than vocab size
     num_qa_templates: int = 3  # Number of different Q&A patterns
 
 
@@ -222,7 +223,7 @@ def main(config: QADatasetConfig):
     np.random.seed(config.seed)
     random.seed(config.seed)
     
-    print("Generating Simple Q&A dataset...")
+    print("Generating Simple Q&A dataset (20 word vocab)...")
     print(f"Configuration:")
     print(f"  Max sequence length: {config.max_seq_len}")
     print(f"  Vocabulary size: {config.vocab_size}")

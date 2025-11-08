@@ -1,0 +1,500 @@
+--- Example 0 ---
+Sentence: word14 word3 word94 word35 word31 word28 word17 word13 word86 word69 word11 word75 word54 word4 word27
+Question: what is the 9th word in the sentence ?
+Answer:   word86
+
+--- Example 1 ---
+Sentence: word3 word71 word25 word91 word83 word89 word69 word53 word28 word57 word75 word35 word0 word20
+Question: what is the word after word69 in the sentence ?
+Answer:   word53
+
+--- Example 2 ---
+Sentence: word35 word19 word27 word43 word13 word11 word48 word12 word45 word44
+Question: what is the word after word13 in the sentence ?
+Answer:   word11
+
+--- Example 3 ---
+Sentence: word93 word58 word68 word15 word48
+Question: what is the 5th word in the sentence ?
+Answer:   word48
+
+--- Example 4 ---
+Sentence: word80 word79 word46 word73 word24 word90 word8 word5 word84
+Question: what is the 5th word in the sentence ?
+Answer:   word24
+
+--- Example 5 ---
+Sentence: word29 word12 word48 word35 word58 word81
+Question: how many words are in the sentence ?
+Answer:   6
+
+--- Example 6 ---
+Sentence: word47 word45 word26 word85 word34 word89 word87
+Question: what is the word after word47 in the sentence ?
+Answer:   word45
+
+--- Example 7 ---
+Sentence: word81 word21 word68 word93 word31 word20 word59 word48 word34 word88 word71 word28 word87 word41
+Question: what is the 4th word in the sentence ?
+Answer:   word93
+
+--- Example 8 ---
+Sentence: word40 word51 word34 word8 word27
+Question: what is the word after word34 in the sentence ?
+Answer:   word8
+
+--- Example 9 ---
+Sentence: word83 word63 word50 word82 word58 word18 word33 word17
+Question: what is the 5th word in the sentence ?
+Answer:   word58
+
+--- Example 10 ---
+Sentence: word74 word54 word51 word46 word28 word17 word65 word63 word11 word6 word14 word19 word80 word20 word87 word76
+Question: what is the 13th word in the sentence ?
+Answer:   word80
+
+--- Example 11 ---
+Sentence: word76 word59 word67 word32 word70 word1 word87 word92 word14 word68 word34
+Question: what is the word after word1 in the sentence ?
+Answer:   word87
+
+--- Example 12 ---
+Sentence: word37 word55 word20 word58 word0 word92
+Question: what is the word after word20 in the sentence ?
+Answer:   word58
+
+--- Example 13 ---
+Sentence: word22 word64 word13 word80 word38 word81 word77 word25 word19 word47 word20 word69 word67
+Question: what is the 10th word in the sentence ?
+Answer:   word47
+
+--- Example 14 ---
+Sentence: word62 word2 word14 word46 word39 word30 word7 word72 word10 word93
+Question: how many words are in the sentence ?
+Answer:   10
+
+--- Example 15 ---
+Sentence: word68 word16 word84 word60 word70 word21
+Question: how many words are in the sentence ?
+Answer:   6
+
+--- Example 16 ---
+Sentence: word77 word54 word27 word69 word93 word88 word25 word91 word39 word51 word85 word83 word47
+Question: how many words are in the sentence ?
+Answer:   13
+
+--- Example 17 ---
+Sentence: word57 word15 word31 word28 word8 word43 word2 word75 word70 word29 word0 word9 word90
+Question: what is the word after word57 in the sentence ?
+Answer:   word15
+
+--- Example 18 ---
+Sentence: word8 word4 word42 word9 word65 word30 word35 word85
+Question: how many words are in the sentence ?
+Answer:   8
+
+--- Example 19 ---
+Sentence: word69 word16 word92 word73 word60 word31 word52 word24
+Question: what is the 2th word in the sentence ?
+Answer:   word16
+
+--- Example 20 ---
+Sentence: word55 word45 word54 word52 word59 word93 word6 word86 word83 word82 word12 word7 word51 word43 word13
+Question: what is the 4th word in the sentence ?
+Answer:   word52
+
+--- Example 21 ---
+Sentence: word68 word57 word17 word54 word23 word35 word59 word31
+Question: what is the 8th word in the sentence ?
+Answer:   word31
+
+--- Example 22 ---
+Sentence: word12 word6 word83 word69 word1 word11 word30 word21 word52 word62 word61 word27 word51
+Question: what is the 3th word in the sentence ?
+Answer:   word83
+
+--- Example 23 ---
+Sentence: word0 word49 word33 word58 word36 word54 word89 word93 word71 word84 word91
+Question: how many words are in the sentence ?
+Answer:   11
+
+--- Example 24 ---
+Sentence: word24 word37 word27 word7 word74 word94 word69
+Question: what is the 6th word in the sentence ?
+Answer:   word94
+
+--- Example 25 ---
+Sentence: word7 word6 word74 word61 word64 word67 word20 word65 word10 word23
+Question: what is the 10th word in the sentence ?
+Answer:   word23
+
+--- Example 26 ---
+Sentence: word86 word30 word51 word15 word72 word31
+Question: what is the word after word72 in the sentence ?
+Answer:   word31
+
+--- Example 27 ---
+Sentence: word79 word10 word53 word84 word74
+Question: what is the word after word53 in the sentence ?
+Answer:   word84
+
+--- Example 28 ---
+Sentence: word26 word85 word91 word40 word30 word33 word50 word16 word82
+Question: how many words are in the sentence ?
+Answer:   9
+
+--- Example 29 ---
+Sentence: word40 word9 word1 word58 word79 word72 word12 word68 word27 word64 word33 word16
+Question: how many words are in the sentence ?
+Answer:   12
+
+--- Example 30 ---
+Sentence: word31 word47 word36 word20 word56 word69
+Question: what is the word after word36 in the sentence ?
+Answer:   word20
+
+--- Example 31 ---
+Sentence: word83 word67 word1 word85 word70 word38 word84 word13 word17 word33 word14 word95 word19 word34
+Question: how many words are in the sentence ?
+Answer:   14
+
+--- Example 32 ---
+Sentence: word26 word91 word43 word87 word81 word33 word64 word62 word32 word6 word11 word54 word35 word5
+Question: what is the 6th word in the sentence ?
+Answer:   word33
+
+--- Example 33 ---
+Sentence: word81 word33 word20 word94 word56 word70 word90
+Question: how many words are in the sentence ?
+Answer:   7
+
+--- Example 34 ---
+Sentence: word1 word14 word9 word88 word19 word69 word4 word47 word74 word70 word18 word55 word16
+Question: what is the 5th word in the sentence ?
+Answer:   word19
+
+--- Example 35 ---
+Sentence: word5 word45 word26 word87 word31 word85 word13 word71 word52 word79
+Question: what is the word after word26 in the sentence ?
+Answer:   word87
+
+--- Example 36 ---
+Sentence: word20 word22 word52 word3 word94 word42 word85 word31
+Question: how many words are in the sentence ?
+Answer:   8
+
+--- Example 37 ---
+Sentence: word89 word13 word48 word4 word60 word28 word25
+Question: how many words are in the sentence ?
+Answer:   7
+
+--- Example 38 ---
+Sentence: word39 word29 word28 word3 word84 word24 word51 word42 word35 word8
+Question: how many words are in the sentence ?
+Answer:   10
+
+--- Example 39 ---
+Sentence: word82 word65 word51 word86 word68 word42 word3 word14 word33 word22
+Question: what is the word after word68 in the sentence ?
+Answer:   word42
+
+--- Example 40 ---
+Sentence: word13 word76 word55 word44 word93
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 41 ---
+Sentence: word77 word65 word14 word49 word73 word24 word32 word5 word90 word55 word0
+Question: what is the word after word90 in the sentence ?
+Answer:   word55
+
+--- Example 42 ---
+Sentence: word92 word94 word85 word25 word46 word55 word8 word42 word79 word40 word84 word15 word38 word64 word39
+Question: what is the word after word8 in the sentence ?
+Answer:   word42
+
+--- Example 43 ---
+Sentence: word51 word89 word37 word70 word16 word24 word53 word85 word48 word86
+Question: what is the word after word37 in the sentence ?
+Answer:   word70
+
+--- Example 44 ---
+Sentence: word72 word38 word51 word70 word0 word36 word26 word55 word74 word77 word83 word41 word59 word56
+Question: how many words are in the sentence ?
+Answer:   14
+
+--- Example 45 ---
+Sentence: word27 word65 word60 word94 word21 word84 word10 word36 word81 word79 word42 word11 word30 word86 word39
+Question: what is the 13th word in the sentence ?
+Answer:   word30
+
+--- Example 46 ---
+Sentence: word18 word3 word5 word31 word60 word78 word9 word58
+Question: how many words are in the sentence ?
+Answer:   8
+
+--- Example 47 ---
+Sentence: word73 word24 word91 word89 word49 word63 word51 word31 word18 word83 word88 word0 word13 word54 word28
+Question: what is the 13th word in the sentence ?
+Answer:   word13
+
+--- Example 48 ---
+Sentence: word66 word59 word6 word71 word31 word15 word58 word17 word85 word67 word76 word40 word56 word78 word92 word64
+Question: how many words are in the sentence ?
+Answer:   16
+
+--- Example 49 ---
+Sentence: word57 word20 word95 word60 word33 word31 word81 word35 word66 word62 word80 word30 word56
+Question: what is the 12th word in the sentence ?
+Answer:   word30
+
+--- Example 50 ---
+Sentence: word30 word34 word42 word40 word69 word10 word17 word19 word29
+Question: how many words are in the sentence ?
+Answer:   9
+
+--- Example 51 ---
+Sentence: word19 word90 word27 word8 word53 word52 word42 word69 word59 word7 word26 word49 word74 word89 word2 word73
+Question: how many words are in the sentence ?
+Answer:   16
+
+--- Example 52 ---
+Sentence: word0 word45 word38 word49 word53 word68 word95 word94 word69 word77 word28 word62
+Question: what is the 5th word in the sentence ?
+Answer:   word53
+
+--- Example 53 ---
+Sentence: word62 word3 word49 word43 word85 word86 word51 word92 word21 word59 word16
+Question: what is the word after word21 in the sentence ?
+Answer:   word59
+
+--- Example 54 ---
+Sentence: word50 word75 word72 word84 word3
+Question: what is the 4th word in the sentence ?
+Answer:   word84
+
+--- Example 55 ---
+Sentence: word59 word23 word6 word33 word48 word41 word27
+Question: how many words are in the sentence ?
+Answer:   7
+
+--- Example 56 ---
+Sentence: word43 word48 word35 word53 word32 word10 word60 word2 word95 word69
+Question: what is the 6th word in the sentence ?
+Answer:   word10
+
+--- Example 57 ---
+Sentence: word83 word8 word5 word3 word31 word25 word2 word79
+Question: what is the 4th word in the sentence ?
+Answer:   word3
+
+--- Example 58 ---
+Sentence: word60 word85 word14 word72 word27 word59 word89
+Question: how many words are in the sentence ?
+Answer:   7
+
+--- Example 59 ---
+Sentence: word21 word77 word95 word91 word14 word20 word39 word13 word74 word3
+Question: how many words are in the sentence ?
+Answer:   10
+
+--- Example 60 ---
+Sentence: word86 word48 word50 word91 word25 word9 word75 word88 word80 word31 word13 word89 word38 word87
+Question: what is the word after word38 in the sentence ?
+Answer:   word87
+
+--- Example 61 ---
+Sentence: word72 word5 word44 word68 word54 word84
+Question: how many words are in the sentence ?
+Answer:   6
+
+--- Example 62 ---
+Sentence: word64 word82 word43 word1 word53 word62
+Question: what is the 4th word in the sentence ?
+Answer:   word1
+
+--- Example 63 ---
+Sentence: word81 word58 word90 word19 word55 word22 word93 word66 word83 word34
+Question: what is the word after word83 in the sentence ?
+Answer:   word34
+
+--- Example 64 ---
+Sentence: word59 word55 word93 word75 word34 word41 word31 word11 word35 word57 word72 word78
+Question: what is the word after word31 in the sentence ?
+Answer:   word11
+
+--- Example 65 ---
+Sentence: word3 word63 word41 word23 word62 word27 word45 word33 word43 word35
+Question: what is the word after word62 in the sentence ?
+Answer:   word27
+
+--- Example 66 ---
+Sentence: word1 word66 word24 word10 word30 word92 word52 word62 word71 word88 word60 word82 word91
+Question: how many words are in the sentence ?
+Answer:   13
+
+--- Example 67 ---
+Sentence: word2 word11 word37 word28 word51 word88 word31 word39 word84 word74 word47 word60
+Question: what is the word after word84 in the sentence ?
+Answer:   word74
+
+--- Example 68 ---
+Sentence: word54 word95 word70 word42 word45 word89 word58 word34 word39 word32
+Question: what is the 2th word in the sentence ?
+Answer:   word95
+
+--- Example 69 ---
+Sentence: word24 word40 word15 word95 word68 word88 word23 word27 word94 word61 word35 word92 word75 word67 word76 word36
+Question: what is the 7th word in the sentence ?
+Answer:   word23
+
+--- Example 70 ---
+Sentence: word29 word46 word22 word38 word1 word90 word68 word16 word35
+Question: what is the 1th word in the sentence ?
+Answer:   word29
+
+--- Example 71 ---
+Sentence: word37 word89 word16 word81 word62 word13 word1 word73 word36 word60 word61 word56 word43
+Question: what is the 1th word in the sentence ?
+Answer:   word37
+
+--- Example 72 ---
+Sentence: word61 word14 word8 word51 word62 word9 word73 word80 word87
+Question: what is the 3th word in the sentence ?
+Answer:   word8
+
+--- Example 73 ---
+Sentence: word72 word38 word10 word31 word15 word71 word53
+Question: what is the word after word15 in the sentence ?
+Answer:   word71
+
+--- Example 74 ---
+Sentence: word28 word66 word48 word57 word56 word38 word75 word54 word39 word72 word79 word7 word78 word94
+Question: what is the 13th word in the sentence ?
+Answer:   word78
+
+--- Example 75 ---
+Sentence: word80 word27 word33 word84 word10 word20 word30 word22
+Question: what is the word after word80 in the sentence ?
+Answer:   word27
+
+--- Example 76 ---
+Sentence: word0 word52 word57 word88 word76 word60 word37
+Question: what is the 2th word in the sentence ?
+Answer:   word52
+
+--- Example 77 ---
+Sentence: word90 word36 word89 word58 word9 word87 word29 word33 word80
+Question: what is the word after word58 in the sentence ?
+Answer:   word9
+
+--- Example 78 ---
+Sentence: word14 word69 word28 word82 word19 word34 word18 word9 word7 word21 word39
+Question: what is the word after word21 in the sentence ?
+Answer:   word39
+
+--- Example 79 ---
+Sentence: word56 word15 word59 word88 word38 word89 word51 word34 word64
+Question: what is the word after word34 in the sentence ?
+Answer:   word64
+
+--- Example 80 ---
+Sentence: word10 word76 word5 word55 word94 word41 word77 word32 word3 word11 word29 word86
+Question: what is the word after word11 in the sentence ?
+Answer:   word29
+
+--- Example 81 ---
+Sentence: word86 word34 word73 word5 word22
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 82 ---
+Sentence: word83 word56 word35 word23 word74 word55 word81 word62 word11 word60 word44 word52 word42
+Question: how many words are in the sentence ?
+Answer:   13
+
+--- Example 83 ---
+Sentence: word13 word20 word42 word52 word88 word63 word36 word84 word51 word70 word4 word58 word11 word40 word32
+Question: how many words are in the sentence ?
+Answer:   15
+
+--- Example 84 ---
+Sentence: word51 word65 word0 word84 word69 word59
+Question: how many words are in the sentence ?
+Answer:   6
+
+--- Example 85 ---
+Sentence: word24 word66 word46 word79 word63
+Question: what is the word after word79 in the sentence ?
+Answer:   word63
+
+--- Example 86 ---
+Sentence: word26 word34 word70 word16 word36
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 87 ---
+Sentence: word62 word15 word3 word80 word77 word30 word90 word20 word39 word70 word1 word52 word11 word28 word14 word59
+Question: what is the 5th word in the sentence ?
+Answer:   word77
+
+--- Example 88 ---
+Sentence: word91 word37 word65 word90 word34 word53 word61 word60 word31 word58 word70 word18
+Question: how many words are in the sentence ?
+Answer:   12
+
+--- Example 89 ---
+Sentence: word76 word65 word95 word17 word8 word35 word53 word43
+Question: what is the word after word95 in the sentence ?
+Answer:   word17
+
+--- Example 90 ---
+Sentence: word36 word92 word38 word75 word74
+Question: what is the word after word75 in the sentence ?
+Answer:   word74
+
+--- Example 91 ---
+Sentence: word57 word68 word61 word44 word42 word70 word69
+Question: how many words are in the sentence ?
+Answer:   7
+
+--- Example 92 ---
+Sentence: word41 word24 word89 word30 word73 word49 word29 word52 word5 word40 word95 word60
+Question: what is the word after word29 in the sentence ?
+Answer:   word52
+
+--- Example 93 ---
+Sentence: word84 word83 word19 word63 word4 word16 word64 word75 word42 word12 word56
+Question: what is the 9th word in the sentence ?
+Answer:   word42
+
+--- Example 94 ---
+Sentence: word1 word92 word18 word52 word83 word19 word9 word60 word33 word43 word79 word88
+Question: how many words are in the sentence ?
+Answer:   12
+
+--- Example 95 ---
+Sentence: word10 word42 word86 word68 word48 word40 word80 word91 word62 word69 word4 word79 word8 word30 word87
+Question: how many words are in the sentence ?
+Answer:   15
+
+--- Example 96 ---
+Sentence: word95 word11 word55 word12 word81 word90 word56 word21
+Question: what is the word after word55 in the sentence ?
+Answer:   word12
+
+--- Example 97 ---
+Sentence: word5 word41 word7 word37 word45
+Question: how many words are in the sentence ?
+Answer:   5
+
+--- Example 98 ---
+Sentence: word18 word31 word67 word52 word72 word87 word23 word21 word22 word10 word78
+Question: how many words are in the sentence ?
+Answer:   11
+
+--- Example 99 ---
+Sentence: word87 word30 word63 word74 word18 word29 word59 word81 word32 word58 word85 word1 word36 word86
+Question: what is the word after word63 in the sentence ?
+Answer:   word74
+
