@@ -134,6 +134,11 @@ def generate_dataset(config: QADatasetConfig, split: str, token_to_id: Dict[str,
 
     all_inputs = []
     all_labels = []
+    puzzle_identifiers = []
+    puzzle_indices = [0]
+    group_indices = [0]
+    
+    example_count = 0
     
     for i in range(num_puzzles):
         if i % 500 == 0:
@@ -150,6 +155,11 @@ def generate_dataset(config: QADatasetConfig, split: str, token_to_id: Dict[str,
         inp, lbl = encode_and_pad(question, sentence, answer, token_to_id, config.max_seq_len)
         all_inputs.append(inp)
         all_labels.append(lbl)
+        example_count += 1
+
+        puzzle_indices.append(example_count)
+        puzzle_identifiers.append(0)  # All Q&A puzzles have ID 0
+        group_indices.append(i + 1)
 
     # Save dataset
     save_dir = os.path.join(config.output_dir, split)
@@ -158,6 +168,9 @@ def generate_dataset(config: QADatasetConfig, split: str, token_to_id: Dict[str,
     results_np = {
         "inputs": np.array(all_inputs, dtype=np.int32),
         "labels": np.array(all_labels, dtype=np.int32),
+        "puzzle_identifiers": np.array(puzzle_identifiers, dtype=np.int32),
+        "puzzle_indices": np.array(puzzle_indices, dtype=np.int32),
+        "group_indices": np.array(group_indices, dtype=np.int32),
     }
     
     for key, value in results_np.items():
@@ -203,10 +216,13 @@ def main(config: QADatasetConfig):
     generate_dataset(config, "train", token_to_id)
     generate_dataset(config, "test", token_to_id)
     
-    # Save vocabulary
+    # Save vocabulary and identifiers
     os.makedirs(config.output_dir, exist_ok=True)
     with open(os.path.join(config.output_dir, "vocab.json"), "w") as f:
         json.dump({"token_to_id": token_to_id, "id_to_token": id_to_token}, f, indent=2)
+        
+    with open(os.path.join(config.output_dir, "identifiers.json"), "w") as f:
+        json.dump(["<blank>", "qa"], f)
 
     print("\n" + "="*50)
     print("Dataset generated successfully!")
