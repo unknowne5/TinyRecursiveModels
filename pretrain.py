@@ -78,6 +78,7 @@ class PretrainConfig(pydantic.BaseModel):
     project_name: Optional[str] = None
     run_name: Optional[str] = None
     load_checkpoint: Optional[str] = None
+    load_from_checkpoint_dir: Optional[str] = None
     checkpoint_path: Optional[str] = None
 
     # Extras
@@ -271,11 +272,23 @@ def save_train_state(config: PretrainConfig, train_state: TrainState):
 
 
 def load_checkpoint(model: nn.Module, config: PretrainConfig, device: str = "cuda"):
-    if config.load_checkpoint is not None:
-        print(f"Loading checkpoint {config.load_checkpoint}")
+    checkpoint_to_load = config.load_checkpoint
+    if config.load_from_checkpoint_dir:
+        print(f"Searching for latest checkpoint in {config.load_from_checkpoint_dir}")
+        try:
+            checkpoints = [f for f in os.listdir(config.load_from_checkpoint_dir) if f.startswith('step_')]
+            if checkpoints:
+                latest_checkpoint = max(checkpoints, key=lambda x: int(x.split('_')[1]))
+                checkpoint_to_load = os.path.join(config.load_from_checkpoint_dir, latest_checkpoint)
+                print(f"Found latest checkpoint: {checkpoint_to_load}")
+        except FileNotFoundError:
+            print(f"Checkpoint directory not found: {config.load_from_checkpoint_dir}")
+
+    if checkpoint_to_load is not None:
+        print(f"Loading checkpoint {checkpoint_to_load}")
 
         # Load state dict
-        state_dict = torch.load(config.load_checkpoint, map_location=device)
+        state_dict = torch.load(checkpoint_to_load, map_location=device)
 
         # Resize and reset puzzle emb if needed
         puzzle_emb_name = "_orig_mod.model.inner.puzzle_emb.weights"
@@ -288,7 +301,7 @@ def load_checkpoint(model: nn.Module, config: PretrainConfig, device: str = "cud
                 state_dict[puzzle_emb_name] = (
                     torch.mean(puzzle_emb, dim=0, keepdim=True).expand(expected_shape).contiguous()
                 )
-        model.load_state_dict(state_dict, assign=True)
+        model.load_state_dict(state_dict, assign=True, strict=False)
 
 
 def compute_lr(base_lr: float, config: PretrainConfig, train_state: TrainState):

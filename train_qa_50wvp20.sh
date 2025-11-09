@@ -1,0 +1,29 @@
+#!/bin/sh
+
+!DISABLE_COMPILE=1 uv run python pretrain.py \
+    arch=trm \
+    data_paths="[data/qa_50wvp20]" \
+    checkpoint_dir="checkpoints/qa_50wvp20" \
+    load_from_checkpoint_dir="checkpoints/qa_50wvp20" \
+    arch.halt_exploration_prob=0.1 \
+    arch.halt_max_steps=12 \
+    arch.H_cycles=2 \
+    arch.L_cycles=2 \
+    arch.H_layers=0 \
+    arch.L_layers=2 \
+    arch.hidden_size=64 \
+    arch.num_heads=2 \
+    arch.expansion=2 \
+    arch.puzzle_emb_ndim=4 \
+    arch.forward_dtype=float32 \
+    arch.puzzle_emb_len=4 \
+    global_batch_size=512 \
+    epochs=1500 \
+    lr=0.001 \
+    puzzle_emb_lr=0.01 \
+    weight_decay=0.001 \
+    puzzle_emb_weight_decay=0.0 \
+    lr_warmup_steps=0 \
+    eval_interval=1 \
+    +entity="unknownentity5555-test" \
+    +project_name="trm"
