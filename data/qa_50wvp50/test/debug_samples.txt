@@ -1,0 +1,900 @@
+--- Example 0 ---
+Sentence: word10 word23 word4 word22 word20 word32 word26 word19 word11 word31 word41 word42
+Question: what is the word after word41 in the sentence ?
+Answer:   word42
+Input:    [23 19 22 24 14 66 18 22 21  3  2 35 48 29 47 45 57 51 44 36 56 66 67  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [67  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 1 ---
+Sentence: word48 word33 word32 word18 word2 word5 word23 word17 word28 word38
+Question: what are the first 4 words in the sentence ?
+Answer:   word48 word33 word32 word18
+Input:    [23 15 22 16  8 25 18 22 21  3  2 73 58 57 43 27 30 48 42 53 63  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [73 58 57 43  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 2 ---
+Sentence: word49 word14 word50 word29 word7 word10 word2 word21 word40 word35 word25
+Question: what is the 3 word in the sentence ?
+Answer:   word50
+Input:    [23 19 22  7 24 18 22 21  3  2 74 39 75 54 32 35 27 46 65 60 50  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [75  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 3 ---
+Sentence: word37 word27 word2 word3 word36 word45 word24 word33 word40 word13 word8 word14 word48 word30 word41
+Question: what is the 9 word in the sentence ?
+Answer:   word40
+Input:    [23 19 22 13 24 18 22 21  3  2 62 52 27 28 61 70 49 58 65 38 33 39 73 55
+ 66  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [65  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 4 ---
+Sentence: word39 word44 word21 word35 word19 word12 word13 word49 word30 word15 word16
+Question: how many words are in the sentence ?
+Answer:   11
+Input:    [17 20 25 15 18 22 21  3  2 64 69 46 60 44 37 38 74 55 40 41  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 5 ---
+Sentence: word31 word11 word15 word19 word7 word35
+Question: what are the first 4 words in the sentence ?
+Answer:   word31 word11 word15 word19
+Input:    [23 15 22 16  8 25 18 22 21  3  2 56 36 40 44 32 60  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [56 36 40 44  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 6 ---
+Sentence: word48 word19 word24 word37 word43 word26 word36 word45 word23 word31 word47 word16 word15
+Question: how many words are in the sentence ?
+Answer:   13
+Input:    [17 20 25 15 18 22 21  3  2 73 44 49 62 68 51 61 70 48 56 72 41 40  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 7 ---
+Sentence: word22 word26 word13 word32 word48 word1 word12 word47 word50 word5 word16 word28 word23 word31
+Question: what is the 3 word in the sentence ?
+Answer:   word13
+Input:    [23 19 22  7 24 18 22 21  3  2 47 51 38 57 73 26 37 72 75 30 41 53 48 56
+  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [38  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 8 ---
+Sentence: word28 word33 word47 word27 word4
+Question: how many words are in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 18 22 21  3  2 53 58 72 52 29  1  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 9 ---
+Sentence: word7 word33 word6 word16 word35 word22 word29 word30 word25 word28 word47 word45
+Question: what is the word after word35 in the sentence ?
+Answer:   word22
+Input:    [23 19 22 24 14 60 18 22 21  3  2 32 58 31 41 60 47 54 55 50 53 72 70  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [47  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 10 ---
+Sentence: word5 word24 word11 word37 word10 word3 word17 word34 word14 word12 word50 word19 word20
+Question: what is the word after word3 in the sentence ?
+Answer:   word17
+Input:    [23 19 22 24 14 28 18 22 21  3  2 30 49 36 62 35 28 42 59 39 37 75 44 45
+  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [42  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 11 ---
+Sentence: word41 word49 word18 word21 word39 word32 word30 word19 word24 word16 word29 word8
+Question: what is the word after word30 in the sentence ?
+Answer:   word19
+Input:    [23 19 22 24 14 55 18 22 21  3  2 66 74 43 46 64 57 55 44 49 41 54 33  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [44  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 12 ---
+Sentence: word8 word21 word16 word44 word26 word13 word43 word35 word38 word32 word23 word50
+Question: what is the word after word21 in the sentence ?
+Answer:   word16
+Input:    [23 19 22 24 14 46 18 22 21  3  2 33 46 41 69 51 38 68 60 63 57 48 75  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [41  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 13 ---
+Sentence: word27 word46 word49 word31 word43 word17 word26 word10 word11 word40 word22 word28 word1 word8 word24
+Question: how many words are in the sentence ?
+Answer:   15
+Input:    [17 20 25 15 18 22 21  3  2 52 71 74 56 68 42 51 35 36 65 47 53 26 33 49
+  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 14 ---
+Sentence: word21 word1 word5 word31 word11 word44 word32 word36 word20 word15 word7 word6 word39 word2 word14 word37
+Question: what are the first 2 words in the sentence ?
+Answer:   word21 word1
+Input:    [23 15 22 16  6 25 18 22 21  3  2 46 26 30 56 36 69 57 61 45 40 32 31 64
+ 27 39 62  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [46 26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 15 ---
+Sentence: word49 word27 word36 word7 word39 word1 word3 word38 word31 word14
+Question: what are the first 4 words in the sentence ?
+Answer:   word49 word27 word36 word7
+Input:    [23 15 22 16  8 25 18 22 21  3  2 74 52 61 32 64 26 28 63 56 39  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [74 52 61 32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 16 ---
+Sentence: word23 word14 word3 word27 word48 word36 word10 word31 word37 word50 word47 word18
+Question: how many words are in the sentence ?
+Answer:   12
+Input:    [17 20 25 15 18 22 21  3  2 48 39 28 52 73 61 35 56 62 75 72 43  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 17 ---
+Sentence: word32 word43 word9 word30 word28 word35 word3 word2 word12 word40 word49 word7 word22 word16 word24 word5 word47
+Question: how many words are in the sentence ?
+Answer:   17
+Input:    [17 20 25 15 18 22 21  3  2 57 68 34 55 53 60 28 27 37 65 74 32 47 41 49
+ 30 72  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [ 5 11  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 18 ---
+Sentence: word14 word42 word32 word48 word13 word6 word43 word7 word47 word24 word9 word1 word11 word12 word41 word20 word19 word18 word36
+Question: what is the 2 word in the sentence ?
+Answer:   word42
+Input:    [23 19 22  6 24 18 22 21  3  2 39 67 57 73 38 31 68 32 72 49 34 26 36 37
+ 66 45 44 43 61  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [67  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 19 ---
+Sentence: word14 word19 word42 word22 word33 word44 word13 word40 word46 word23 word28
+Question: what is the word after word40 in the sentence ?
+Answer:   word46
+Input:    [23 19 22 24 14 65 18 22 21  3  2 39 44 67 47 58 69 38 65 71 48 53  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [71  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 20 ---
+Sentence: word40 word41 word34 word4 word18 word47
+Question: what are the first 4 words in the sentence ?
+Answer:   word40 word41 word34 word4
+Input:    [23 15 22 16  8 25 18 22 21  3  2 65 66 59 29 43 72  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [65 66 59 29  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 21 ---
+Sentence: word45 word38 word17 word20 word37 word1 word47 word42 word43 word7 word5 word16 word9 word3 word40 word29 word35 word8
+Question: what are the first 3 words in the sentence ?
+Answer:   word45 word38 word17
+Input:    [23 15 22 16  7 25 18 22 21  3  2 70 63 42 45 62 26 72 67 68 32 30 41 34
+ 28 65 54 60 33  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [70 63 42  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 22 ---
+Sentence: word14 word20 word44 word32 word45 word30 word8 word33 word23 word49 word27 word11 word39 word42
+Question: what is the word after word30 in the sentence ?
+Answer:   word8
+Input:    [23 19 22 24 14 55 18 22 21  3  2 39 45 69 57 70 55 33 58 48 74 52 36 64
+ 67  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 23 ---
+Sentence: word44 word32 word12 word29 word38 word18 word19 word9 word6 word13 word33 word25
+Question: what is the word after word9 in the sentence ?
+Answer:   word6
+Input:    [23 19 22 24 14 34 18 22 21  3  2 69 57 37 54 63 43 44 34 31 38 58 50  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 24 ---
+Sentence: word25 word46 word17 word13 word34 word48 word35 word38 word33 word27 word40 word9 word8 word32 word42 word16 word28 word24
+Question: what are the first 3 words in the sentence ?
+Answer:   word25 word46 word17
+Input:    [23 15 22 16  7 25 18 22 21  3  2 50 71 42 38 59 73 60 63 58 52 65 34 33
+ 57 67 41 53 49  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [50 71 42  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 25 ---
+Sentence: word6 word50 word46 word2 word24 word39 word17 word25 word8 word38 word11 word19 word44
+Question: how many words are in the sentence ?
+Answer:   13
+Input:    [17 20 25 15 18 22 21  3  2 31 75 71 27 49 64 42 50 33 63 36 44 69  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 26 ---
+Sentence: word24 word44 word41 word31 word30
+Question: what is the 3 word in the sentence ?
+Answer:   word41
+Input:    [23 19 22  7 24 18 22 21  3  2 49 69 66 56 55  1  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [66  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 27 ---
+Sentence: word44 word7 word9 word36 word24 word42
+Question: what is the word after word36 in the sentence ?
+Answer:   word24
+Input:    [23 19 22 24 14 61 18 22 21  3  2 69 32 34 61 49 67  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [49  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 28 ---
+Sentence: word32 word50 word19 word43 word38 word35 word6 word37 word42
+Question: what is the 4 word in the sentence ?
+Answer:   word43
+Input:    [23 19 22  8 24 18 22 21  3  2 57 75 44 68 63 60 31 62 67  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [68  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 29 ---
+Sentence: word39 word31 word40 word25 word9 word45 word24 word20 word41 word37 word29 word34 word15 word21 word36 word5 word7 word22 word33
+Question: what is the word after word45 in the sentence ?
+Answer:   word24
+Input:    [23 19 22 24 14 70 18 22 21  3  2 64 56 65 50 34 70 49 45 66 62 54 59 40
+ 46 61 30 32 47 58  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [49  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 30 ---
+Sentence: word19 word20 word43 word42 word21 word22 word12 word44 word10 word28 word2 word13 word37 word18 word36 word38 word46 word24
+Question: how many words are in the sentence ?
+Answer:   18
+Input:    [17 20 25 15 18 22 21  3  2 44 45 68 67 46 47 37 69 35 53 27 38 62 43 61
+ 63 71 49  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [ 5 12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 31 ---
+Sentence: word20 word7 word8 word21 word29 word1 word46 word13 word34 word18 word6 word49 word31 word45 word48 word24 word32 word37 word44
+Question: how many words are in the sentence ?
+Answer:   19
+Input:    [17 20 25 15 18 22 21  3  2 45 32 33 46 54 26 71 38 59 43 31 74 56 70 73
+ 49 57 62 69  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [ 5 13  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 32 ---
+Sentence: word6 word2 word34 word16 word15 word41
+Question: what is the 3 word in the sentence ?
+Answer:   word34
+Input:    [23 19 22  7 24 18 22 21  3  2 31 27 59 41 40 66  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [59  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 33 ---
+Sentence: word20 word34 word43 word7 word5 word49 word25 word11 word6 word46 word45 word15 word31 word24 word27 word4 word28
+Question: how many words are in the sentence ?
+Answer:   17
+Input:    [17 20 25 15 18 22 21  3  2 45 59 68 32 30 74 50 36 31 71 70 40 56 49 52
+ 29 53  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [ 5 11  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 34 ---
+Sentence: word45 word39 word25 word3 word20 word23 word41 word6 word26 word30 word36 word24
+Question: what are the first 4 words in the sentence ?
+Answer:   word45 word39 word25 word3
+Input:    [23 15 22 16  8 25 18 22 21  3  2 70 64 50 28 45 48 66 31 51 55 61 49  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [70 64 50 28  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 35 ---
+Sentence: word36 word49 word8 word40 word13 word1 word34 word42 word23 word25 word43 word17
+Question: what is the word after word36 in the sentence ?
+Answer:   word49
+Input:    [23 19 22 24 14 61 18 22 21  3  2 61 74 33 65 38 26 59 67 48 50 68 42  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [74  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 36 ---
+Sentence: word10 word39 word13 word8 word20 word4 word50 word40 word35 word45 word5 word21 word29 word9 word43
+Question: what are the first 4 words in the sentence ?
+Answer:   word10 word39 word13 word8
+Input:    [23 15 22 16  8 25 18 22 21  3  2 35 64 38 33 45 29 75 65 60 70 30 46 54
+ 34 68  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [35 64 38 33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 37 ---
+Sentence: word26 word5 word41 word12 word16 word27 word49 word22 word33 word7 word25 word8 word14 word48 word11 word9 word24 word32 word39
+Question: how many words are in the sentence ?
+Answer:   19
+Input:    [17 20 25 15 18 22 21  3  2 51 30 66 37 41 52 74 47 58 32 50 33 39 73 36
+ 34 49 57 64  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [ 5 13  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 38 ---
+Sentence: word43 word8 word27 word3 word19 word4 word44 word18 word14 word29 word42 word1
+Question: what are the first 3 words in the sentence ?
+Answer:   word43 word8 word27
+Input:    [23 15 22 16  7 25 18 22 21  3  2 68 33 52 28 44 29 69 43 39 54 67 26  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [68 33 52  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 39 ---
+Sentence: word2 word43 word30 word1 word21 word50 word40 word14
+Question: what is the 7 word in the sentence ?
+Answer:   word40
+Input:    [23 19 22 11 24 18 22 21  3  2 27 68 55 26 46 75 65 39  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [65  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 40 ---
+Sentence: word38 word50 word35 word6 word4 word10 word42 word39 word43 word11 word14 word17 word20 word22 word36 word26 word2 word15 word19
+Question: what are the first 4 words in the sentence ?
+Answer:   word38 word50 word35 word6
+Input:    [23 15 22 16  8 25 18 22 21  3  2 63 75 60 31 29 35 67 64 68 36 39 42 45
+ 47 61 51 27 40 44  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [63 75 60 31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 41 ---
+Sentence: word46 word47 word16 word50 word32 word23 word3 word22 word24
+Question: what are the first 2 words in the sentence ?
+Answer:   word46 word47
+Input:    [23 15 22 16  6 25 18 22 21  3  2 71 72 41 75 57 48 28 47 49  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [71 72  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 42 ---
+Sentence: word22 word45 word40 word12 word46 word35 word17 word19 word29 word39 word49 word15 word8
+Question: how many words are in the sentence ?
+Answer:   13
+Input:    [17 20 25 15 18 22 21  3  2 47 70 65 37 71 60 42 44 54 64 74 40 33  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 43 ---
+Sentence: word36 word21 word39 word23 word33 word3 word47 word43 word48 word40 word12 word27 word34 word30 word6 word45 word42 word20 word18
+Question: what is the 1 word in the sentence ?
+Answer:   word36
+Input:    [23 19 22  5 24 18 22 21  3  2 61 46 64 48 58 28 72 68 73 65 37 52 59 55
+ 31 70 67 45 43  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [61  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 44 ---
+Sentence: word18 word27 word14 word29 word4 word2 word7 word30 word28 word5 word16 word23 word12 word36
+Question: what is the word after word28 in the sentence ?
+Answer:   word5
+Input:    [23 19 22 24 14 53 18 22 21  3  2 43 52 39 54 29 27 32 55 53 30 41 48 37
+ 61  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 45 ---
+Sentence: word21 word11 word36 word39 word9 word31 word34 word23 word45 word47
+Question: how many words are in the sentence ?
+Answer:   10
+Input:    [17 20 25 15 18 22 21  3  2 46 36 61 64 34 56 59 48 70 72  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 46 ---
+Sentence: word28 word46 word41 word23 word16 word18 word49 word2 word11 word39 word43 word32 word31 word30 word35 word40 word26
+Question: what is the word after word23 in the sentence ?
+Answer:   word16
+Input:    [23 19 22 24 14 48 18 22 21  3  2 53 71 66 48 41 43 74 27 36 64 68 57 56
+ 55 60 65 51  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [41  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 47 ---
+Sentence: word8 word31 word1 word44 word13 word25 word29 word43 word50 word2 word6 word32 word39 word42 word9 word12 word22 word30
+Question: what is the 4 word in the sentence ?
+Answer:   word44
+Input:    [23 19 22  8 24 18 22 21  3  2 33 56 26 69 38 50 54 68 75 27 31 57 64 67
+ 34 37 47 55  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [69  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 48 ---
+Sentence: word36 word13 word18 word12 word34 word22 word33 word37 word8
+Question: how many words are in the sentence ?
+Answer:   9
+Input:    [17 20 25 15 18 22 21  3  2 61 38 43 37 59 47 58 62 33  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [13  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 49 ---
+Sentence: word36 word14 word46 word33 word6 word1 word21 word42
+Question: how many words are in the sentence ?
+Answer:   8
+Input:    [17 20 25 15 18 22 21  3  2 61 39 71 58 31 26 46 67  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 50 ---
+Sentence: word18 word1 word16 word48 word21 word8 word44 word14 word38 word5 word50
+Question: what is the 7 word in the sentence ?
+Answer:   word44
+Input:    [23 19 22 11 24 18 22 21  3  2 43 26 41 73 46 33 69 39 63 30 75  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [69  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 51 ---
+Sentence: word29 word20 word6 word28 word17 word39 word7 word47 word45 word48 word3 word34
+Question: how many words are in the sentence ?
+Answer:   12
+Input:    [17 20 25 15 18 22 21  3  2 54 45 31 53 42 64 32 72 70 73 28 59  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 52 ---
+Sentence: word5 word31 word37 word12 word3 word48 word1 word7 word45 word20 word50 word26 word46 word39
+Question: what are the first 2 words in the sentence ?
+Answer:   word5 word31
+Input:    [23 15 22 16  6 25 18 22 21  3  2 30 56 62 37 28 73 26 32 70 45 75 51 71
+ 64  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30 56  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 53 ---
+Sentence: word47 word33 word15 word14 word35 word18 word31 word10 word45 word23 word38 word7 word11
+Question: how many words are in the sentence ?
+Answer:   13
+Input:    [17 20 25 15 18 22 21  3  2 72 58 40 39 60 43 56 35 70 48 63 32 36  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 54 ---
+Sentence: word19 word43 word35 word22 word1 word2 word30 word42 word23 word36 word15 word25 word3 word27 word47
+Question: what is the word after word22 in the sentence ?
+Answer:   word1
+Input:    [23 19 22 24 14 47 18 22 21  3  2 44 68 60 47 26 27 55 67 48 61 40 50 28
+ 52 72  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 55 ---
+Sentence: word31 word9 word29 word41 word40 word24 word12 word15
+Question: how many words are in the sentence ?
+Answer:   8
+Input:    [17 20 25 15 18 22 21  3  2 56 34 54 66 65 49 37 40  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 56 ---
+Sentence: word37 word17 word41 word31 word44 word35
+Question: what is the 3 word in the sentence ?
+Answer:   word41
+Input:    [23 19 22  7 24 18 22 21  3  2 62 42 66 56 69 60  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [66  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 57 ---
+Sentence: word13 word21 word17 word23 word16 word32 word5 word3 word4
+Question: what is the 7 word in the sentence ?
+Answer:   word5
+Input:    [23 19 22 11 24 18 22 21  3  2 38 46 42 48 41 57 30 28 29  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 58 ---
+Sentence: word5 word3 word36 word45 word38 word40 word4
+Question: what is the word after word40 in the sentence ?
+Answer:   word4
+Input:    [23 19 22 24 14 65 18 22 21  3  2 30 28 61 70 63 65 29  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [29  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 59 ---
+Sentence: word47 word21 word41 word6 word31 word48 word29 word44 word46 word2 word35 word17 word25 word45
+Question: what is the 11 word in the sentence ?
+Answer:   word35
+Input:    [23 19 22  5  5 24 18 22 21  3  2 72 46 66 31 56 73 54 69 71 27 60 42 50
+ 70  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [60  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 60 ---
+Sentence: word26 word28 word16 word34 word46 word20
+Question: what are the first 3 words in the sentence ?
+Answer:   word26 word28 word16
+Input:    [23 15 22 16  7 25 18 22 21  3  2 51 53 41 59 71 45  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [51 53 41  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 61 ---
+Sentence: word32 word26 word2 word22 word5 word6
+Question: what is the word after word32 in the sentence ?
+Answer:   word26
+Input:    [23 19 22 24 14 57 18 22 21  3  2 57 51 27 47 30 31  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [51  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 62 ---
+Sentence: word7 word20 word15 word24 word31 word45
+Question: what is the 3 word in the sentence ?
+Answer:   word15
+Input:    [23 19 22  7 24 18 22 21  3  2 32 45 40 49 56 70  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [40  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 63 ---
+Sentence: word8 word20 word44 word7 word32 word6 word31 word47 word14 word1 word17 word28 word50 word41 word30 word9 word23 word40 word2
+Question: what is the 10 word in the sentence ?
+Answer:   word1
+Input:    [23 19 22  5  4 24 18 22 21  3  2 33 45 69 32 57 31 56 72 39 26 42 53 75
+ 66 55 34 48 65 27  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 64 ---
+Sentence: word33 word18 word38 word40 word7 word43 word46
+Question: how many words are in the sentence ?
+Answer:   7
+Input:    [17 20 25 15 18 22 21  3  2 58 43 63 65 32 68 71  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [11  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 65 ---
+Sentence: word35 word50 word39 word1 word29 word44 word8 word21 word26 word42 word25 word19 word48 word31 word18 word40 word23 word10 word45 word38
+Question: how many words are in the sentence ?
+Answer:   20
+Input:    [17 20 25 15 18 22 21  3  2 60 75 64 26 54 69 33 46 51 67 50 44 73 56 43
+ 65 48 35 70 63  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [6 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 66 ---
+Sentence: word8 word4 word21 word17 word34 word23 word15 word12 word50 word14 word41 word39 word30 word44 word22 word5 word33 word32 word19 word28
+Question: how many words are in the sentence ?
+Answer:   20
+Input:    [17 20 25 15 18 22 21  3  2 33 29 46 42 59 48 40 37 75 39 66 64 55 69 47
+ 30 58 57 44 53  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [6 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 67 ---
+Sentence: word4 word25 word31 word16 word28 word18 word43 word6
+Question: what is the word after word25 in the sentence ?
+Answer:   word31
+Input:    [23 19 22 24 14 50 18 22 21  3  2 29 50 56 41 53 43 68 31  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [56  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 68 ---
+Sentence: word22 word19 word26 word28 word34 word27 word9 word44 word8 word25 word10 word3 word17 word47 word24
+Question: what is the word after word8 in the sentence ?
+Answer:   word25
+Input:    [23 19 22 24 14 33 18 22 21  3  2 47 44 51 53 59 52 34 69 33 50 35 28 42
+ 72 49  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [50  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 69 ---
+Sentence: word41 word50 word3 word18 word37 word9 word28 word42 word26 word14 word25 word16
+Question: what is the 4 word in the sentence ?
+Answer:   word18
+Input:    [23 19 22  8 24 18 22 21  3  2 66 75 28 43 62 34 53 67 51 39 50 41  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [43  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 70 ---
+Sentence: word27 word23 word30 word39 word21 word3 word19 word42 word1 word2 word18 word5 word28
+Question: what are the first 4 words in the sentence ?
+Answer:   word27 word23 word30 word39
+Input:    [23 15 22 16  8 25 18 22 21  3  2 52 48 55 64 46 28 44 67 26 27 43 30 53
+  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [52 48 55 64  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 71 ---
+Sentence: word12 word28 word13 word15 word43 word39 word11 word22 word27 word8 word29 word47
+Question: what are the first 3 words in the sentence ?
+Answer:   word12 word28 word13
+Input:    [23 15 22 16  7 25 18 22 21  3  2 37 53 38 40 68 64 36 47 52 33 54 72  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [37 53 38  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 72 ---
+Sentence: word18 word50 word38 word2 word34 word16 word45 word9 word19 word12 word26 word33
+Question: what is the 4 word in the sentence ?
+Answer:   word2
+Input:    [23 19 22  8 24 18 22 21  3  2 43 75 63 27 59 41 70 34 44 37 51 58  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 73 ---
+Sentence: word40 word20 word37 word5 word41 word15 word7 word33 word44 word46 word50 word17 word14 word49 word6 word32
+Question: what is the 13 word in the sentence ?
+Answer:   word14
+Input:    [23 19 22  5  7 24 18 22 21  3  2 65 45 62 30 66 40 32 58 69 71 75 42 39
+ 74 31 57  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [39  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 74 ---
+Sentence: word1 word31 word26 word9 word2 word3 word18 word33 word7 word23 word37 word47 word20 word10
+Question: what is the word after word33 in the sentence ?
+Answer:   word7
+Input:    [23 19 22 24 14 58 18 22 21  3  2 26 56 51 34 27 28 43 58 32 48 62 72 45
+ 35  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 75 ---
+Sentence: word20 word8 word17 word2 word49 word45
+Question: how many words are in the sentence ?
+Answer:   6
+Input:    [17 20 25 15 18 22 21  3  2 45 33 42 27 74 70  1  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [10  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 76 ---
+Sentence: word34 word23 word5 word18 word33 word7 word30 word14 word21 word31 word48 word2 word47 word20 word19
+Question: what is the 1 word in the sentence ?
+Answer:   word34
+Input:    [23 19 22  5 24 18 22 21  3  2 59 48 30 43 58 32 55 39 46 56 73 27 72 45
+ 44  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [59  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 77 ---
+Sentence: word46 word1 word50 word2 word24 word28 word40 word5 word16 word32 word48 word15
+Question: what are the first 4 words in the sentence ?
+Answer:   word46 word1 word50 word2
+Input:    [23 15 22 16  8 25 18 22 21  3  2 71 26 75 27 49 53 65 30 41 57 73 40  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [71 26 75 27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 78 ---
+Sentence: word19 word40 word5 word15 word10 word46 word30 word11 word31 word39 word16 word28 word42 word14 word20 word22 word17 word24 word47 word23
+Question: what is the word after word15 in the sentence ?
+Answer:   word10
+Input:    [23 19 22 24 14 40 18 22 21  3  2 44 65 30 40 35 71 55 36 56 64 41 53 67
+ 39 45 47 42 49 72 48  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 79 ---
+Sentence: word21 word8 word14 word12 word11 word4 word46 word2 word31 word18 word13 word30 word44 word24 word17 word5 word23 word9
+Question: what are the first 4 words in the sentence ?
+Answer:   word21 word8 word14 word12
+Input:    [23 15 22 16  8 25 18 22 21  3  2 46 33 39 37 36 29 71 27 56 43 38 55 69
+ 49 42 30 48 34  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [46 33 39 37  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 80 ---
+Sentence: word27 word16 word43 word42 word29 word30 word23 word31
+Question: what are the first 4 words in the sentence ?
+Answer:   word27 word16 word43 word42
+Input:    [23 15 22 16  8 25 18 22 21  3  2 52 41 68 67 54 55 48 56  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [52 41 68 67  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 81 ---
+Sentence: word6 word50 word13 word45 word40 word11 word2 word35
+Question: what is the 8 word in the sentence ?
+Answer:   word35
+Input:    [23 19 22 12 24 18 22 21  3  2 31 75 38 70 65 36 27 60  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [60  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 82 ---
+Sentence: word9 word18 word19 word29 word20 word27 word44 word49 word39 word42 word22 word25 word31 word37 word24 word43
+Question: what is the word after word25 in the sentence ?
+Answer:   word31
+Input:    [23 19 22 24 14 50 18 22 21  3  2 34 43 44 54 45 52 69 74 64 67 47 50 56
+ 62 49 68  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [56  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 83 ---
+Sentence: word44 word3 word34 word47 word32 word16 word10 word11 word19 word18 word27 word46 word31 word40 word20 word50
+Question: what are the first 3 words in the sentence ?
+Answer:   word44 word3 word34
+Input:    [23 15 22 16  7 25 18 22 21  3  2 69 28 59 72 57 41 35 36 44 43 52 71 56
+ 65 45 75  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [69 28 59  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 84 ---
+Sentence: word46 word8 word24 word45 word19 word25 word2 word27 word33 word44
+Question: what are the first 4 words in the sentence ?
+Answer:   word46 word8 word24 word45
+Input:    [23 15 22 16  8 25 18 22 21  3  2 71 33 49 70 44 50 27 52 58 69  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [71 33 49 70  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 85 ---
+Sentence: word26 word4 word7 word29 word5 word35 word24 word31 word2 word25 word32 word45 word28
+Question: what is the word after word4 in the sentence ?
+Answer:   word7
+Input:    [23 19 22 24 14 29 18 22 21  3  2 51 29 32 54 30 60 49 56 27 50 57 70 53
+  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 86 ---
+Sentence: word44 word11 word12 word28 word43 word40 word42 word25
+Question: what is the word after word42 in the sentence ?
+Answer:   word25
+Input:    [23 19 22 24 14 67 18 22 21  3  2 69 36 37 53 68 65 67 50  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [50  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 87 ---
+Sentence: word11 word13 word26 word41 word3 word29 word50
+Question: what is the 4 word in the sentence ?
+Answer:   word41
+Input:    [23 19 22  8 24 18 22 21  3  2 36 38 51 66 28 54 75  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [66  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 88 ---
+Sentence: word16 word21 word38 word14 word50 word23 word29 word4 word13 word20
+Question: what is the 10 word in the sentence ?
+Answer:   word20
+Input:    [23 19 22  5  4 24 18 22 21  3  2 41 46 63 39 75 48 54 29 38 45  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [45  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 89 ---
+Sentence: word12 word39 word45 word25 word48 word33 word34 word26 word20
+Question: what are the first 2 words in the sentence ?
+Answer:   word12 word39
+Input:    [23 15 22 16  6 25 18 22 21  3  2 37 64 70 50 73 58 59 51 45  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [37 64  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 90 ---
+Sentence: word28 word29 word36 word13 word15 word14 word45 word44 word34 word5 word33 word39 word22 word31 word7 word41 word24
+Question: what is the 1 word in the sentence ?
+Answer:   word28
+Input:    [23 19 22  5 24 18 22 21  3  2 53 54 61 38 40 39 70 69 59 30 58 64 47 56
+ 32 66 49  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [53  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 91 ---
+Sentence: word41 word25 word47 word21 word12 word14 word7 word3 word50 word22 word30 word48 word32 word42
+Question: how many words are in the sentence ?
+Answer:   14
+Input:    [17 20 25 15 18 22 21  3  2 66 50 72 46 37 39 32 28 75 47 55 73 57 67  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 92 ---
+Sentence: word8 word26 word10 word23 word19 word7 word1 word24 word4 word47 word27 word40 word42
+Question: how many words are in the sentence ?
+Answer:   13
+Input:    [17 20 25 15 18 22 21  3  2 33 51 35 48 44 32 26 49 29 72 52 65 67  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 93 ---
+Sentence: word5 word48 word18 word47 word40 word41 word8 word38 word15 word24 word46 word31 word25 word33 word10 word7
+Question: how many words are in the sentence ?
+Answer:   16
+Input:    [17 20 25 15 18 22 21  3  2 30 73 43 72 65 66 33 63 40 49 71 56 50 58 35
+ 32  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [ 5 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 94 ---
+Sentence: word6 word3 word12 word25 word23 word15 word9 word4 word17 word42 word29 word14 word5 word47 word35 word27 word2 word45 word28
+Question: how many words are in the sentence ?
+Answer:   19
+Input:    [17 20 25 15 18 22 21  3  2 31 28 37 50 48 40 34 29 42 67 54 39 30 72 60
+ 52 27 70 53  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [ 5 13  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 95 ---
+Sentence: word49 word29 word47 word13 word35 word9 word21 word26 word5 word34 word17 word1
+Question: what is the 1 word in the sentence ?
+Answer:   word49
+Input:    [23 19 22  5 24 18 22 21  3  2 74 54 72 38 60 34 46 51 30 59 42 26  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [74  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 96 ---
+Sentence: word30 word15 word31 word10 word12 word13 word29 word50 word7 word22 word5 word45 word48 word34 word3 word39 word37 word35
+Question: what are the first 4 words in the sentence ?
+Answer:   word30 word15 word31 word10
+Input:    [23 15 22 16  8 25 18 22 21  3  2 55 40 56 35 37 38 54 75 32 47 30 70 73
+ 59 28 64 62 60  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [55 40 56 35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 97 ---
+Sentence: word8 word18 word7 word14 word12 word26 word29 word42 word23 word35 word30 word22 word48 word6 word16 word44 word11 word33
+Question: what is the word after word18 in the sentence ?
+Answer:   word7
+Input:    [23 19 22 24 14 43 18 22 21  3  2 33 43 32 39 37 51 54 67 48 60 55 47 73
+ 31 41 69 36 58  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 98 ---
+Sentence: word42 word13 word21 word2 word7 word24 word4
+Question: what is the word after word13 in the sentence ?
+Answer:   word21
+Input:    [23 19 22 24 14 38 18 22 21  3  2 67 38 46 27 32 49 29  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [46  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 99 ---
+Sentence: word47 word21 word34 word1 word8 word40 word24 word32 word43 word14 word9
+Question: how many words are in the sentence ?
+Answer:   11
+Input:    [17 20 25 15 18 22 21  3  2 72 46 59 26 33 65 49 57 68 39 34  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
