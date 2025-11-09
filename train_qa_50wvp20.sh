@@ -3,8 +3,7 @@
 !DISABLE_COMPILE=1 uv run python pretrain.py \
     arch=trm \
     data_paths="[data/qa_50wvp20]" \
-    checkpoint_dir="checkpoints/qa_50wvp20" \
-    load_from_checkpoint_dir="checkpoints/qa_50wvp20" \
+    +load_from_checkpoint_dir="checkpoints/trm/qa_50wvp_r9" \
     arch.halt_exploration_prob=0.1 \
     arch.halt_max_steps=12 \
     arch.H_cycles=2 \
@@ -25,5 +24,6 @@
     puzzle_emb_weight_decay=0.0 \
     lr_warmup_steps=0 \
     eval_interval=1 \
+    +run_name="qa_50wvp_r11" \
     +entity="unknownentity5555-test" \
     +project_name="trm"
