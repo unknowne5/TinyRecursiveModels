@@ -1,0 +1,900 @@
+--- Example 0 ---
+Sentence: word2 word1 word5 word10 word7 word6 word9 word3 word4 word8
+Question: what is the word before word1 in the sentence ?
+Answer:   word2
+Input:    [23 19 22 24 77 26 18 22 21  3  2 27 26 30 35 32 31 34 28 29 33  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 1 ---
+Sentence: word4 word10 word1 word5 word2
+Question: how many words are after word10 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 35 18 22 21  3  2 29 35 26 30 27  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 2 ---
+Sentence: word10 word5 word1 word7 word2 word4 word3 word6
+Question: what are the last 2 words in the sentence ?
+Answer:   word3 word6
+Input:    [23 15 22 81  6 25 18 22 21  3  2 35 30 26 32 27 29 28 31  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [28 31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 3 ---
+Sentence: word2 word10 word7 word1 word3 word6 word5
+Question: what is the word before word5 in the sentence ?
+Answer:   word6
+Input:    [23 19 22 24 77 30 18 22 21  3  2 27 35 32 26 28 31 30  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 4 ---
+Sentence: word9 word2 word7 word1 word5 word3 word6 word4
+Question: what are the last 4 words in the sentence ?
+Answer:   word5 word3 word6 word4
+Input:    [23 15 22 81  8 25 18 22 21  3  2 34 27 32 26 30 28 31 29  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30 28 31 29  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 5 ---
+Sentence: word1 word4 word5 word10 word2
+Question: what is the word before word2 in the sentence ?
+Answer:   word10
+Input:    [23 19 22 24 77 27 18 22 21  3  2 26 29 30 35 27  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 6 ---
+Sentence: word8 word6 word3 word10 word7 word2 word9
+Question: what is the word before word2 in the sentence ?
+Answer:   word7
+Input:    [23 19 22 24 77 27 18 22 21  3  2 33 31 28 35 32 27 34  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 7 ---
+Sentence: word3 word9 word4 word2 word8 word6 word10 word5 word1 word7
+Question: what is the word before word8 in the sentence ?
+Answer:   word2
+Input:    [23 19 22 24 77 33 18 22 21  3  2 28 34 29 27 33 31 35 30 26 32  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 8 ---
+Sentence: word6 word7 word5 word1 word2
+Question: how many words are between word7 and word1 in the sentence ?
+Answer:   1
+Input:    [17 20 25 15 78 32 76 26 18 22 21  3  2 31 32 30 26 27  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 9 ---
+Sentence: word8 word3 word5 word2 word7 word10 word9 word4
+Question: how many words are after word7 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 32 18 22 21  3  2 33 28 30 27 32 35 34 29  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 10 ---
+Sentence: word6 word4 word3 word5 word9 word1 word7 word10
+Question: what are the last 4 words in the sentence ?
+Answer:   word9 word1 word7 word10
+Input:    [23 15 22 81  8 25 18 22 21  3  2 31 29 28 30 34 26 32 35  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [34 26 32 35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 11 ---
+Sentence: word7 word2 word10 word4 word5 word8
+Question: how many words are between word7 and word5 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 78 32 76 30 18 22 21  3  2 32 27 35 29 30 33  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 12 ---
+Sentence: word2 word9 word5 word7 word6 word3 word1 word10 word8 word4
+Question: how many words are after word2 in the sentence ?
+Answer:   9
+Input:    [17 20 25 15 14 27 18 22 21  3  2 27 34 30 32 31 28 26 35 33 29  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [13  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 13 ---
+Sentence: word5 word9 word3 word10 word1 word8 word2 word6 word4 word7
+Question: what is the word before word2 in the sentence ?
+Answer:   word8
+Input:    [23 19 22 24 77 27 18 22 21  3  2 30 34 28 35 26 33 27 31 29 32  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 14 ---
+Sentence: word1 word2 word6 word7 word3 word9 word10 word4
+Question: what is the word before word2 in the sentence ?
+Answer:   word1
+Input:    [23 19 22 24 77 27 18 22 21  3  2 26 27 31 32 28 34 35 29  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 15 ---
+Sentence: word8 word2 word3 word9 word6 word4 word7 word5 word10 word1
+Question: what are the last 4 words in the sentence ?
+Answer:   word7 word5 word10 word1
+Input:    [23 15 22 81  8 25 18 22 21  3  2 33 27 28 34 31 29 32 30 35 26  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32 30 35 26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 16 ---
+Sentence: word7 word6 word8 word5 word4 word1 word2
+Question: what are the last 2 words in the sentence ?
+Answer:   word1 word2
+Input:    [23 15 22 81  6 25 18 22 21  3  2 32 31 33 30 29 26 27  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26 27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 17 ---
+Sentence: word1 word9 word4 word5 word2 word10 word7
+Question: what is the word before word4 in the sentence ?
+Answer:   word9
+Input:    [23 19 22 24 77 29 18 22 21  3  2 26 34 29 30 27 35 32  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [34  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 18 ---
+Sentence: word1 word6 word2 word5 word8
+Question: how many words are between word6 and word5 in the sentence ?
+Answer:   1
+Input:    [17 20 25 15 78 31 76 30 18 22 21  3  2 26 31 27 30 33  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 19 ---
+Sentence: word3 word8 word4 word7 word9 word6 word2 word1 word10
+Question: how many words are after word6 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 31 18 22 21  3  2 28 33 29 32 34 31 27 26 35  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 20 ---
+Sentence: word7 word8 word1 word6 word10 word9 word5 word2
+Question: how many words are between word8 and word2 in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 78 33 76 27 18 22 21  3  2 32 33 26 31 35 34 30 27  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 21 ---
+Sentence: word4 word9 word8 word2 word10 word7
+Question: how many words are between word9 and word2 in the sentence ?
+Answer:   1
+Input:    [17 20 25 15 78 34 76 27 18 22 21  3  2 29 34 33 27 35 32  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 22 ---
+Sentence: word8 word9 word2 word1 word6
+Question: what is the word before word9 in the sentence ?
+Answer:   word8
+Input:    [23 19 22 24 77 34 18 22 21  3  2 33 34 27 26 31  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 23 ---
+Sentence: word3 word7 word8 word4 word2 word9
+Question: what is the word before word8 in the sentence ?
+Answer:   word7
+Input:    [23 19 22 24 77 33 18 22 21  3  2 28 32 33 29 27 34  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 24 ---
+Sentence: word1 word7 word5 word9 word4 word3 word6 word8
+Question: how many words are after word7 in the sentence ?
+Answer:   6
+Input:    [17 20 25 15 14 32 18 22 21  3  2 26 32 30 34 29 28 31 33  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [10  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 25 ---
+Sentence: word5 word4 word1 word10 word6 word7
+Question: what is the word before word10 in the sentence ?
+Answer:   word1
+Input:    [23 19 22 24 77 35 18 22 21  3  2 30 29 26 35 31 32  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 26 ---
+Sentence: word1 word8 word3 word10 word5
+Question: what is the word before word3 in the sentence ?
+Answer:   word8
+Input:    [23 19 22 24 77 28 18 22 21  3  2 26 33 28 35 30  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 27 ---
+Sentence: word10 word2 word4 word8 word1
+Question: what are the last 4 words in the sentence ?
+Answer:   word2 word4 word8 word1
+Input:    [23 15 22 81  8 25 18 22 21  3  2 35 27 29 33 26  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [27 29 33 26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 28 ---
+Sentence: word1 word2 word7 word6 word5 word8 word3 word9 word10
+Question: how many words are between word6 and word5 in the sentence ?
+Answer:   0
+Input:    [17 20 25 15 78 31 76 30 18 22 21  3  2 26 27 32 31 30 33 28 34 35  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 29 ---
+Sentence: word3 word5 word8 word10 word1 word6 word4 word7
+Question: what is the word before word5 in the sentence ?
+Answer:   word3
+Input:    [23 19 22 24 77 30 18 22 21  3  2 28 30 33 35 26 31 29 32  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [28  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 30 ---
+Sentence: word4 word9 word5 word2 word3 word1 word7 word10 word6
+Question: what are the last 3 words in the sentence ?
+Answer:   word7 word10 word6
+Input:    [23 15 22 81  7 25 18 22 21  3  2 29 34 30 27 28 26 32 35 31  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32 35 31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 31 ---
+Sentence: word5 word9 word1 word6 word10 word3 word8 word4 word2
+Question: what is the word before word1 in the sentence ?
+Answer:   word9
+Input:    [23 19 22 24 77 26 18 22 21  3  2 30 34 26 31 35 28 33 29 27  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [34  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 32 ---
+Sentence: word9 word3 word5 word10 word8 word2 word7 word1 word6 word4
+Question: how many words are between word9 and word3 in the sentence ?
+Answer:   0
+Input:    [17 20 25 15 78 34 76 28 18 22 21  3  2 34 28 30 35 33 27 32 26 31 29  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 33 ---
+Sentence: word7 word5 word1 word8 word3 word2 word6 word10 word9 word4
+Question: what is the word before word1 in the sentence ?
+Answer:   word5
+Input:    [23 19 22 24 77 26 18 22 21  3  2 32 30 26 33 28 27 31 35 34 29  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 34 ---
+Sentence: word3 word9 word1 word7 word10
+Question: what are the last 3 words in the sentence ?
+Answer:   word1 word7 word10
+Input:    [23 15 22 81  7 25 18 22 21  3  2 28 34 26 32 35  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26 32 35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 35 ---
+Sentence: word1 word5 word6 word7 word10 word3
+Question: what are the last 4 words in the sentence ?
+Answer:   word6 word7 word10 word3
+Input:    [23 15 22 81  8 25 18 22 21  3  2 26 30 31 32 35 28  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31 32 35 28  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 36 ---
+Sentence: word2 word6 word7 word5 word9 word10
+Question: what are the last 2 words in the sentence ?
+Answer:   word9 word10
+Input:    [23 15 22 81  6 25 18 22 21  3  2 27 31 32 30 34 35  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [34 35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 37 ---
+Sentence: word7 word1 word3 word6 word8 word4
+Question: what are the last 3 words in the sentence ?
+Answer:   word6 word8 word4
+Input:    [23 15 22 81  7 25 18 22 21  3  2 32 26 28 31 33 29  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31 33 29  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 38 ---
+Sentence: word2 word7 word1 word9 word4 word10
+Question: what are the last 3 words in the sentence ?
+Answer:   word9 word4 word10
+Input:    [23 15 22 81  7 25 18 22 21  3  2 27 32 26 34 29 35  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [34 29 35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 39 ---
+Sentence: word5 word4 word9 word1 word6 word2 word8
+Question: how many words are between word5 and word9 in the sentence ?
+Answer:   1
+Input:    [17 20 25 15 78 30 76 34 18 22 21  3  2 30 29 34 26 31 27 33  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 40 ---
+Sentence: word6 word9 word7 word10 word5 word3 word1
+Question: what is the word before word10 in the sentence ?
+Answer:   word7
+Input:    [23 19 22 24 77 35 18 22 21  3  2 31 34 32 35 30 28 26  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 41 ---
+Sentence: word10 word5 word1 word8 word9 word4
+Question: how many words are between word1 and word4 in the sentence ?
+Answer:   2
+Input:    [17 20 25 15 78 26 76 29 18 22 21  3  2 35 30 26 33 34 29  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 42 ---
+Sentence: word10 word9 word2 word4 word5 word8 word3 word1
+Question: how many words are after word10 in the sentence ?
+Answer:   7
+Input:    [17 20 25 15 14 35 18 22 21  3  2 35 34 27 29 30 33 28 26  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [11  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 43 ---
+Sentence: word9 word4 word6 word10 word1 word3 word5 word7 word8
+Question: how many words are between word1 and word8 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 78 26 76 33 18 22 21  3  2 34 29 31 35 26 28 30 32 33  1  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 44 ---
+Sentence: word7 word6 word10 word9 word3 word5 word2 word1 word4 word8
+Question: what are the last 4 words in the sentence ?
+Answer:   word2 word1 word4 word8
+Input:    [23 15 22 81  8 25 18 22 21  3  2 32 31 35 34 28 30 27 26 29 33  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [27 26 29 33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 45 ---
+Sentence: word5 word7 word1 word3 word9 word2 word4 word6 word10
+Question: how many words are after word6 in the sentence ?
+Answer:   1
+Input:    [17 20 25 15 14 31 18 22 21  3  2 30 32 26 28 34 27 29 31 35  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 46 ---
+Sentence: word4 word9 word8 word7 word6 word2 word1 word5
+Question: how many words are between word9 and word1 in the sentence ?
+Answer:   4
+Input:    [17 20 25 15 78 34 76 26 18 22 21  3  2 29 34 33 32 31 27 26 30  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 47 ---
+Sentence: word5 word4 word9 word2 word1 word6
+Question: what are the last 3 words in the sentence ?
+Answer:   word2 word1 word6
+Input:    [23 15 22 81  7 25 18 22 21  3  2 30 29 34 27 26 31  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [27 26 31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 48 ---
+Sentence: word2 word8 word7 word6 word5 word10 word4 word9 word3
+Question: what are the last 2 words in the sentence ?
+Answer:   word9 word3
+Input:    [23 15 22 81  6 25 18 22 21  3  2 27 33 32 31 30 35 29 34 28  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [34 28  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 49 ---
+Sentence: word1 word2 word7 word9 word8 word5 word4 word10 word3 word6
+Question: how many words are after word7 in the sentence ?
+Answer:   7
+Input:    [17 20 25 15 14 32 18 22 21  3  2 26 27 32 34 33 30 29 35 28 31  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [11  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 50 ---
+Sentence: word9 word10 word6 word7 word4 word5 word8 word3
+Question: how many words are after word10 in the sentence ?
+Answer:   6
+Input:    [17 20 25 15 14 35 18 22 21  3  2 34 35 31 32 29 30 33 28  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [10  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 51 ---
+Sentence: word8 word10 word5 word7 word2 word3 word4 word9 word1 word6
+Question: how many words are after word10 in the sentence ?
+Answer:   8
+Input:    [17 20 25 15 14 35 18 22 21  3  2 33 35 30 32 27 28 29 34 26 31  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 52 ---
+Sentence: word5 word4 word10 word3 word7 word8 word1 word9 word6 word2
+Question: how many words are after word10 in the sentence ?
+Answer:   7
+Input:    [17 20 25 15 14 35 18 22 21  3  2 30 29 35 28 32 33 26 34 31 27  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [11  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 53 ---
+Sentence: word4 word2 word7 word10 word3 word5 word8 word9 word1 word6
+Question: how many words are after word8 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 33 18 22 21  3  2 29 27 32 35 28 30 33 34 26 31  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 54 ---
+Sentence: word1 word7 word8 word10 word3 word6 word4 word2 word9
+Question: how many words are after word10 in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 14 35 18 22 21  3  2 26 32 33 35 28 31 29 27 34  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 55 ---
+Sentence: word7 word8 word1 word4 word3 word10 word2
+Question: how many words are after word8 in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 14 33 18 22 21  3  2 32 33 26 29 28 35 27  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 56 ---
+Sentence: word9 word1 word7 word5 word8 word10 word6 word3 word2
+Question: what are the last 3 words in the sentence ?
+Answer:   word6 word3 word2
+Input:    [23 15 22 81  7 25 18 22 21  3  2 34 26 32 30 33 35 31 28 27  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31 28 27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 57 ---
+Sentence: word1 word5 word7 word3 word2 word4
+Question: how many words are between word7 and word3 in the sentence ?
+Answer:   0
+Input:    [17 20 25 15 78 32 76 28 18 22 21  3  2 26 30 32 28 27 29  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 58 ---
+Sentence: word7 word5 word2 word4 word1 word9 word6
+Question: how many words are between word5 and word9 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 78 30 76 34 18 22 21  3  2 32 30 27 29 26 34 31  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 59 ---
+Sentence: word1 word10 word4 word2 word9
+Question: what are the last 2 words in the sentence ?
+Answer:   word2 word9
+Input:    [23 15 22 81  6 25 18 22 21  3  2 26 35 29 27 34  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [27 34  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 60 ---
+Sentence: word8 word2 word4 word10 word6 word3
+Question: how many words are between word2 and word6 in the sentence ?
+Answer:   2
+Input:    [17 20 25 15 78 27 76 31 18 22 21  3  2 33 27 29 35 31 28  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 61 ---
+Sentence: word2 word3 word5 word1 word8 word7 word9 word4 word10
+Question: how many words are after word1 in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 14 26 18 22 21  3  2 27 28 30 26 33 32 34 29 35  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 62 ---
+Sentence: word10 word4 word2 word6 word3
+Question: what is the word before word4 in the sentence ?
+Answer:   word10
+Input:    [23 19 22 24 77 29 18 22 21  3  2 35 29 27 31 28  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [35  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 63 ---
+Sentence: word9 word7 word6 word1 word5 word3 word10
+Question: how many words are after word1 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 26 18 22 21  3  2 34 32 31 26 30 28 35  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 64 ---
+Sentence: word7 word6 word8 word9 word2
+Question: how many words are after word6 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 31 18 22 21  3  2 32 31 33 34 27  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 65 ---
+Sentence: word9 word5 word8 word4 word7 word10 word3 word2 word1 word6
+Question: how many words are between word4 and word2 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 78 29 76 27 18 22 21  3  2 34 30 33 29 32 35 28 27 26 31  1
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 66 ---
+Sentence: word10 word7 word6 word1 word4 word3 word2 word8
+Question: what are the last 3 words in the sentence ?
+Answer:   word3 word2 word8
+Input:    [23 15 22 81  7 25 18 22 21  3  2 35 32 31 26 29 28 27 33  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [28 27 33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 67 ---
+Sentence: word6 word5 word9 word8 word1 word7 word2
+Question: what is the word before word9 in the sentence ?
+Answer:   word5
+Input:    [23 19 22 24 77 34 18 22 21  3  2 31 30 34 33 26 32 27  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 68 ---
+Sentence: word7 word8 word4 word6 word9 word10 word5 word1 word3 word2
+Question: what are the last 3 words in the sentence ?
+Answer:   word1 word3 word2
+Input:    [23 15 22 81  7 25 18 22 21  3  2 32 33 29 31 34 35 30 26 28 27  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26 28 27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 69 ---
+Sentence: word4 word5 word6 word10 word9 word8 word3 word2 word7 word1
+Question: how many words are after word9 in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 14 34 18 22 21  3  2 29 30 31 35 34 33 28 27 32 26  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 70 ---
+Sentence: word5 word4 word2 word6 word8 word3 word1
+Question: what are the last 2 words in the sentence ?
+Answer:   word3 word1
+Input:    [23 15 22 81  6 25 18 22 21  3  2 30 29 27 31 33 28 26  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [28 26  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 71 ---
+Sentence: word8 word5 word9 word1 word2 word3
+Question: what are the last 3 words in the sentence ?
+Answer:   word1 word2 word3
+Input:    [23 15 22 81  7 25 18 22 21  3  2 33 30 34 26 27 28  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26 27 28  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 72 ---
+Sentence: word5 word1 word3 word8 word9 word6
+Question: how many words are between word1 and word6 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 78 26 76 31 18 22 21  3  2 30 26 28 33 34 31  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 73 ---
+Sentence: word8 word2 word1 word5 word3 word4 word7 word9 word6 word10
+Question: what is the word before word4 in the sentence ?
+Answer:   word3
+Input:    [23 19 22 24 77 29 18 22 21  3  2 33 27 26 30 28 29 32 34 31 35  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [28  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 74 ---
+Sentence: word2 word10 word7 word4 word1 word5 word6 word8
+Question: what are the last 4 words in the sentence ?
+Answer:   word1 word5 word6 word8
+Input:    [23 15 22 81  8 25 18 22 21  3  2 27 35 32 29 26 30 31 33  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26 30 31 33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 75 ---
+Sentence: word2 word4 word10 word5 word9 word7 word8
+Question: how many words are after word5 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 30 18 22 21  3  2 27 29 35 30 34 32 33  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 76 ---
+Sentence: word5 word7 word10 word8 word9 word1 word6 word4
+Question: what are the last 3 words in the sentence ?
+Answer:   word1 word6 word4
+Input:    [23 15 22 81  7 25 18 22 21  3  2 30 32 35 33 34 26 31 29  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [26 31 29  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 77 ---
+Sentence: word2 word3 word4 word10 word5 word1 word7 word6 word8 word9
+Question: how many words are after word5 in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 14 30 18 22 21  3  2 27 28 29 35 30 26 32 31 33 34  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 78 ---
+Sentence: word4 word5 word9 word6 word10
+Question: what is the word before word9 in the sentence ?
+Answer:   word5
+Input:    [23 19 22 24 77 34 18 22 21  3  2 29 30 34 31 35  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 79 ---
+Sentence: word10 word4 word7 word1 word5 word2 word6
+Question: how many words are between word4 and word6 in the sentence ?
+Answer:   4
+Input:    [17 20 25 15 78 29 76 31 18 22 21  3  2 35 29 32 26 30 27 31  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 80 ---
+Sentence: word1 word3 word5 word8 word6
+Question: how many words are between word1 and word8 in the sentence ?
+Answer:   2
+Input:    [17 20 25 15 78 26 76 33 18 22 21  3  2 26 28 30 33 31  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 81 ---
+Sentence: word5 word7 word10 word8 word9 word4 word6 word1
+Question: what is the word before word9 in the sentence ?
+Answer:   word8
+Input:    [23 19 22 24 77 34 18 22 21  3  2 30 32 35 33 34 29 31 26  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 82 ---
+Sentence: word6 word5 word1 word8 word2 word9 word7 word3 word10 word4
+Question: what are the last 3 words in the sentence ?
+Answer:   word3 word10 word4
+Input:    [23 15 22 81  7 25 18 22 21  3  2 31 30 26 33 27 34 32 28 35 29  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [28 35 29  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 83 ---
+Sentence: word8 word5 word3 word9 word4 word6 word1 word2 word10
+Question: how many words are after word6 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 31 18 22 21  3  2 33 30 28 34 29 31 26 27 35  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 84 ---
+Sentence: word2 word3 word6 word4 word8 word7 word9
+Question: how many words are after word8 in the sentence ?
+Answer:   2
+Input:    [17 20 25 15 14 33 18 22 21  3  2 27 28 31 29 33 32 34  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 85 ---
+Sentence: word8 word2 word6 word3 word7
+Question: what is the word before word7 in the sentence ?
+Answer:   word3
+Input:    [23 19 22 24 77 32 18 22 21  3  2 33 27 31 28 32  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [28  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 86 ---
+Sentence: word1 word9 word8 word4 word10 word2 word3 word7 word5
+Question: how many words are after word1 in the sentence ?
+Answer:   8
+Input:    [17 20 25 15 14 26 18 22 21  3  2 26 34 33 29 35 27 28 32 30  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 87 ---
+Sentence: word5 word9 word3 word8 word4 word6
+Question: what is the word before word9 in the sentence ?
+Answer:   word5
+Input:    [23 19 22 24 77 34 18 22 21  3  2 30 34 28 33 29 31  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 88 ---
+Sentence: word10 word4 word3 word8 word5 word1 word9 word6 word7 word2
+Question: how many words are after word4 in the sentence ?
+Answer:   8
+Input:    [17 20 25 15 14 29 18 22 21  3  2 35 29 28 33 30 26 34 31 32 27  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 89 ---
+Sentence: word3 word8 word5 word9 word6 word10 word4 word2 word7 word1
+Question: how many words are after word7 in the sentence ?
+Answer:   1
+Input:    [17 20 25 15 14 32 18 22 21  3  2 28 33 30 34 31 35 29 27 32 26  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 90 ---
+Sentence: word7 word4 word3 word10 word1 word8
+Question: how many words are after word3 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 28 18 22 21  3  2 32 29 28 35 26 33  1  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 91 ---
+Sentence: word5 word1 word10 word6 word3 word8 word4 word9 word2
+Question: how many words are after word8 in the sentence ?
+Answer:   3
+Input:    [17 20 25 15 14 33 18 22 21  3  2 30 26 35 31 28 33 29 34 27  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 92 ---
+Sentence: word9 word10 word7 word4 word3 word2 word5
+Question: how many words are after word10 in the sentence ?
+Answer:   5
+Input:    [17 20 25 15 14 35 18 22 21  3  2 34 35 32 29 28 27 30  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 93 ---
+Sentence: word1 word6 word8 word9 word4 word7 word2 word5
+Question: what is the word before word8 in the sentence ?
+Answer:   word6
+Input:    [23 19 22 24 77 33 18 22 21  3  2 26 31 33 34 29 32 27 30  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 94 ---
+Sentence: word10 word6 word2 word7 word4 word1 word9 word5 word3
+Question: how many words are after word2 in the sentence ?
+Answer:   6
+Input:    [17 20 25 15 14 27 18 22 21  3  2 35 31 27 32 29 26 34 30 28  1  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [10  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 95 ---
+Sentence: word8 word5 word6 word9 word10
+Question: how many words are after word8 in the sentence ?
+Answer:   4
+Input:    [17 20 25 15 14 33 18 22 21  3  2 33 30 31 34 35  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0]
+
+--- Example 96 ---
+Sentence: word9 word7 word6 word8 word10 word4 word1
+Question: what is the word before word6 in the sentence ?
+Answer:   word7
+Input:    [23 19 22 24 77 31 18 22 21  3  2 34 32 31 33 35 29 26  1  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [32  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 97 ---
+Sentence: word5 word4 word2 word9 word1 word6 word7 word10 word8 word3
+Question: what is the word before word7 in the sentence ?
+Answer:   word6
+Input:    [23 19 22 24 77 32 18 22 21  3  2 30 29 27 34 26 31 32 35 33 28  1  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 98 ---
+Sentence: word5 word6 word9 word4 word2
+Question: what are the last 4 words in the sentence ?
+Answer:   word6 word9 word4 word2
+Input:    [23 15 22 81  8 25 18 22 21  3  2 30 31 34 29 27  1  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [31 34 29 27  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
+--- Example 99 ---
+Sentence: word10 word3 word9 word2 word1 word5 word4 word8
+Question: what are the last 3 words in the sentence ?
+Answer:   word5 word4 word8
+Input:    [23 15 22 81  7 25 18 22 21  3  2 35 28 34 27 26 30 29 33  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Labels:   [30 29 33  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
