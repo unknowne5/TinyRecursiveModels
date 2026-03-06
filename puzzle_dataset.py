@@ -64,6 +64,7 @@ class PuzzleDataset(IterableDataset):
         prev_blank_identifier_id = None
         prev_sets = None
         prev_num_identifiers = None
+        prev_is_vision = None
         mean_puzzle_examples = 0
         total_puzzles = 0
         total_groups = 0
@@ -78,6 +79,7 @@ class PuzzleDataset(IterableDataset):
                 prev_blank_identifier_id = current_metadata.blank_identifier_id
                 prev_sets = current_metadata.sets
                 prev_num_identifiers = current_metadata.num_puzzle_identifiers
+                prev_is_vision = current_metadata.is_vision
             else:
                 assert prev_seq_len == current_metadata.seq_len
                 assert prev_vocab_size == current_metadata.vocab_size
@@ -86,6 +88,7 @@ class PuzzleDataset(IterableDataset):
                 assert prev_blank_identifier_id == current_metadata.blank_identifier_id
                 assert prev_sets == current_metadata.sets
                 assert prev_num_identifiers == current_metadata.num_puzzle_identifiers
+                assert prev_is_vision == current_metadata.is_vision
             mean_puzzle_examples += current_metadata.mean_puzzle_examples*current_metadata.total_puzzles
             total_puzzles += current_metadata.total_puzzles
             total_groups += current_metadata.total_groups
@@ -102,7 +105,8 @@ class PuzzleDataset(IterableDataset):
             total_groups=total_groups,
             mean_puzzle_examples=mean_puzzle_examples,
             total_puzzles=total_puzzles,
-            sets=prev_sets
+            sets=prev_sets,
+            is_vision=prev_is_vision
         )
 
         # Checks
@@ -184,6 +188,9 @@ class PuzzleDataset(IterableDataset):
                 "labels": IGNORE_LABEL_ID,
                 "puzzle_identifiers": self.metadata.blank_identifier_id
             }
+            if self.metadata.is_vision:
+                pad_values["text_inputs"] = self.metadata.pad_id
+                
             batch = {k: np.pad(v, ((0, pad_size), ) + ((0, 0), ) * (v.ndim - 1), constant_values=pad_values[k]) for k, v in batch.items()}
 
         # To tensor
