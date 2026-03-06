@@ -128,6 +128,10 @@ def generate_dataset(config: VisionDatasetConfig, split: str, token_to_id: Dict[
     puzzle_identifiers, puzzle_indices, group_indices = [], [0], [0]
     debug_samples = []
     
+    seq_len_patches = (config.image_size // config.patch_size) ** 2
+    # Total seq len is text tokens + image patches
+    total_seq_len = 16 + seq_len_patches
+    
     for i in range(num_puzzles):
         if i % 1000 == 0:
             print(f"  Generating {split} example {i}/{num_puzzles}")
@@ -136,7 +140,8 @@ def generate_dataset(config: VisionDatasetConfig, split: str, token_to_id: Dict[
         
         # Max length of 16 is enough for the question tokens
         txt_inp = encode_text(question, token_to_id, max_len=16, add_eos=False)
-        lbl = encode_text(answer, token_to_id, max_len=config.max_seq_len, add_eos=True)
+        # Pad the labels to the full sequence length (80)
+        lbl = encode_text(answer, token_to_id, max_len=total_seq_len, add_eos=True)
         
         if i < 10:
             debug_samples.append({
@@ -181,12 +186,8 @@ def generate_dataset(config: VisionDatasetConfig, split: str, token_to_id: Dict[
     with open(os.path.join(save_dir, "debug_samples.json"), "w") as f:
         json.dump(debug_samples, f, indent=2)
         
-    seq_len_patches = (config.image_size // config.patch_size) ** 2
-    # Total seq len is text tokens + image patches
-    total_seq_len = 16 + seq_len_patches 
-        
     metadata = PuzzleDatasetMetadata(
-        seq_len=max(config.max_seq_len, total_seq_len), # Just for metadata completeness
+        seq_len=max(config.max_seq_len, total_seq_len), 
         vocab_size=len(token_to_id), 
         pad_id=token_to_id["[PAD]"],
         ignore_label_id=token_to_id["[PAD]"], 
