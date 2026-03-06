@@ -133,9 +133,8 @@ class TinyRecursiveReasoningModel_ACTV1_Inner(nn.Module):
 
         if getattr(self.config, 'is_vision', False):
             self.patch_embed = nn.Conv2d(self.config.image_channels, self.config.hidden_size, kernel_size=self.config.patch_size, stride=self.config.patch_size)
-        else:
-            self.embed_tokens = CastedEmbedding(self.config.vocab_size, self.config.hidden_size, init_std=embed_init_std, cast_to=self.forward_dtype)
-        
+            
+        self.embed_tokens = CastedEmbedding(self.config.vocab_size, self.config.hidden_size, init_std=embed_init_std, cast_to=self.forward_dtype)
         self.lm_head      = CastedLinear(self.config.hidden_size, self.config.vocab_size, bias=False)
         self.q_head       = CastedLinear(self.config.hidden_size, 2, bias=True)
 
