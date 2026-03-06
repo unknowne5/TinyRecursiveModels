@@ -70,6 +70,10 @@ class Model_ACTV2Config(BaseModel):
 
     forward_dtype: str = "bfloat16"
 
+    # Vision support
+    is_vision: bool = False
+    image_channels: int = 3
+    patch_size: int = 16
 
 class Model_ACTV2Block(nn.Module):
     def __init__(self, config: Model_ACTV2Config) -> None:
@@ -126,12 +130,15 @@ class Model_ACTV2_Inner(nn.Module):
         self.embed_scale = math.sqrt(self.config.hidden_size)
         embed_init_std = 1.0 / self.embed_scale
 
-        self.embed_tokens = CastedEmbedding(
-            self.config.vocab_size,
-            self.config.hidden_size,
-            init_std=embed_init_std,
-            cast_to=self.forward_dtype,
-        )
+        if getattr(self.config, 'is_vision', False):
+            self.patch_embed = nn.Conv2d(self.config.image_channels, self.config.hidden_size, kernel_size=self.config.patch_size, stride=self.config.patch_size)
+        else:
+            self.embed_tokens = CastedEmbedding(
+                self.config.vocab_size,
+                self.config.hidden_size,
+                init_std=embed_init_std,
+                cast_to=self.forward_dtype,
+            )
         self.lm_head = CastedLinear(self.config.hidden_size, self.config.vocab_size, bias=False)
         self.q_head = CastedLinear(self.config.hidden_size, 2, bias=True)
 
@@ -180,9 +187,22 @@ class Model_ACTV2_Inner(nn.Module):
             self.q_head.weight.zero_()
             self.q_head.bias.fill_(-5)  # type: ignore
 
-    def _input_embeddings(self, input: torch.Tensor, puzzle_identifiers: torch.Tensor):
-        # Token embedding
-        embedding = self.embed_tokens(input.to(torch.int32))
+    def _input_embeddings(self, input: torch.Tensor, puzzle_identifiers: torch.Tensor, text_input: Optional[torch.Tensor] = None):
+        # Token or Patch embedding
+        if getattr(self.config, 'is_vision', False):
+            # input shape [B, C, H, W]
+            img_embedding = self.patch_embed(input.to(self.forward_dtype))
+            # [B, D, H', W'] -> [B, D, H'*W'] -> [B, H'*W', D]
+            img_embedding = img_embedding.flatten(2).transpose(1, 2)
+            
+            if text_input is not None:
+                text_embedding = self.embed_tokens(text_input.to(torch.int32))
+                # Concatenate text tokens and image patches
+                embedding = torch.cat((text_embedding, img_embedding), dim=-2)
+            else:
+                embedding = img_embedding
+        else:
+            embedding = self.embed_tokens(input.to(torch.int32))
 
         # Puzzle embeddings
         if self.config.puzzle_emb_ndim > 0:
@@ -227,7 +247,7 @@ class Model_ACTV2_Inner(nn.Module):
         )
 
         # Input encoding
-        input_embeddings = self._input_embeddings(batch["inputs"], batch["puzzle_identifiers"])
+        input_embeddings = self._input_embeddings(batch["inputs"], batch["puzzle_identifiers"], batch.get("text_inputs"))
 
         # 1-step grad
         z_H = self.H_level(carry.z_H, input_embeddings, **seq_info)

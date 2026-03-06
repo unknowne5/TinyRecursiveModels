@@ -12,6 +12,7 @@ from dataset.common import PuzzleDatasetMetadata
 
 from argdantic import ArgParser
 from pydantic import BaseModel
+from PIL import Image
 
 def _sample_batch(rng: np.random.Generator, group_order: np.ndarray, puzzle_indices: np.ndarray, group_indices: np.ndarray, start_index: int, global_batch_size: int):
     # Pack examples into a full batch
@@ -129,6 +130,9 @@ class PuzzleDataset(IterableDataset):
             "puzzle_indices": None,
             "group_indices": None
         }
+        
+        if self.metadata.is_vision:
+            field_mmap_modes["text_inputs"] = "r"
 
         # Load data
         self._data = {}
@@ -142,11 +146,31 @@ class PuzzleDataset(IterableDataset):
                     field_name: np.load(os.path.join(dataset_path, self.split, f"{set_name}__{field_name}.npy"), mmap_mode=mmap_mode)
                     for field_name, mmap_mode in field_mmap_modes.items()
                 }
+                # Also store the path so we can load images if needed
+                self._data[set_name_]["_dataset_path"] = dataset_path
 
 
-    def _collate_batch(self, batch):
-        # Convert dtype
-        batch = {k: v.astype(np.int32) for k, v in batch.items()}
+    def _collate_batch(self, batch, dataset_path=None):
+        # Load images if this is a vision dataset
+        if self.metadata.is_vision and "inputs" in batch and dataset_path is not None:
+            images = []
+            for img_idx in batch["inputs"]:
+                img_path = os.path.join(dataset_path, self.split, "images", f"image_{img_idx}.png")
+                # Need to return as float32 tensors scaled [0, 1] matching previous implementation
+                # The shape should be C x H x W
+                with Image.open(img_path) as img:
+                    img_np = np.array(img, dtype=np.float32) / 255.0
+                    if len(img_np.shape) == 2:  # Grayscale to RGB
+                        img_np = np.stack([img_np, img_np, img_np], axis=-1)
+                    img_np = img_np.transpose(2, 0, 1)  # H, W, C -> C, H, W
+                    images.append(img_np)
+            batch["inputs"] = np.stack(images)
+
+        # Convert dtype for non-float inputs
+        for k, v in batch.items():
+            if k == "inputs" and self.metadata.is_vision:
+                continue # leave inputs as float32
+            batch[k] = v.astype(np.int32)
 
         # Convert ignore label IDs
         if self.metadata.ignore_label_id is not None:
@@ -156,7 +180,7 @@ class PuzzleDataset(IterableDataset):
         if batch["puzzle_identifiers"].size < self.local_batch_size:
             pad_size = self.local_batch_size - batch["puzzle_identifiers"].size
             pad_values = {
-                "inputs": self.metadata.pad_id,
+                "inputs": self.metadata.pad_id if not self.metadata.is_vision else 0.0,
                 "labels": IGNORE_LABEL_ID,
                 "puzzle_identifiers": self.metadata.blank_identifier_id
             }
@@ -187,11 +211,15 @@ class PuzzleDataset(IterableDataset):
 
                     puzzle_indices.append(puzzle_index)
                 
-                batch = self._collate_batch({
+                batch_dict = {
                     "inputs": dataset["inputs"][local_start: local_end],
                     "labels": dataset["labels"][local_start: local_end],
                     "puzzle_identifiers": dataset["puzzle_identifiers"][puzzle_indices]
-                })
+                }
+                if self.metadata.is_vision:
+                    batch_dict["text_inputs"] = dataset["text_inputs"][local_start: local_end]
+
+                batch = self._collate_batch(batch_dict, dataset_path=dataset.get("_dataset_path"))
 
                 yield set_name, batch, end_index - start_index
                 
@@ -228,11 +256,16 @@ class PuzzleDataset(IterableDataset):
 
                 batch_indices        = batch_indices       [self.config.rank * self.local_batch_size: (self.config.rank + 1) * self.local_batch_size]
                 batch_puzzle_indices = batch_puzzle_indices[self.config.rank * self.local_batch_size: (self.config.rank + 1) * self.local_batch_size]
-                batch = self._collate_batch({
+                
+                batch_dict = {
                     "inputs": dataset["inputs"][batch_indices],
                     "labels": dataset["labels"][batch_indices],
                     "puzzle_identifiers": dataset["puzzle_identifiers"][batch_puzzle_indices]
-                })
+                }
+                if self.metadata.is_vision:
+                    batch_dict["text_inputs"] = dataset["text_inputs"][batch_indices]
+                
+                batch = self._collate_batch(batch_dict, dataset_path=dataset.get("_dataset_path"))
 
                 yield set_name, batch, global_effective_batch_size
                 
