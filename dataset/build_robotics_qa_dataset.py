@@ -12,7 +12,7 @@ import math
 import numpy as np
 import os
 import random
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Optional
 from argdantic import ArgParser
 from pydantic import BaseModel
 
@@ -22,13 +22,14 @@ from common import PuzzleDatasetMetadata
 cli = ArgParser()
 
 class RoboticsDatasetConfig(BaseModel):
-    output_dir: str = "data/robotics_qa"
+    output_dir: str = "data/robotics_qa_m1"
     max_seq_len: int = 32
     image_size: int = 64
     patch_size: int = 8
     num_train_puzzles: int = 8000
     num_test_puzzles: int = 1500
     seed: int = 42
+    tasks: Optional[List[str]] = None
 
 # --- Vocabulary and Tokenization ---
 
@@ -125,7 +126,7 @@ def inverse_kinematics(l1, l2, target_x, target_y, base_x, base_y):
     
     return int(math.degrees(theta1_rad)), int(math.degrees(theta2_rad))
 
-def generate_environment(image_size: int):
+def generate_environment(image_size: int, allowed_tasks: List[str]):
     # Arm configuration
     base_x, base_y = image_size // 2, image_size - 10
     l1, l2 = image_size // 3, image_size // 3
@@ -211,7 +212,10 @@ def generate_environment(image_size: int):
     target_obj_idx = None
     
     # Generate task
-    task_type = random.choice(["qa_state", "qa_vision", "motor_control"])
+    if not allowed_tasks:
+        raise ValueError("allowed_tasks list cannot be empty")
+        
+    task_type = random.choice(allowed_tasks)
     
     if task_type == "qa_state":
         if random.random() < 0.5:
@@ -314,7 +318,7 @@ def generate_dataset(config: RoboticsDatasetConfig, split: str, token_to_id: Dic
         if i % 1000 == 0:
             print(f"  Generating {split} example {i}/{num_puzzles}")
             
-        image, question, answer, solution_img = generate_environment(config.image_size)
+        image, question, answer, solution_img = generate_environment(config.image_size, config.tasks)
         
         txt_inp = encode_text(question, token_to_id, max_len=config.max_seq_len, add_eos=False)
         lbl = encode_text(answer, token_to_id, max_len=total_seq_len, add_eos=True)
@@ -385,6 +389,9 @@ def main(config: RoboticsDatasetConfig):
     np.random.seed(config.seed)
     random.seed(config.seed)
     
+    if config.tasks is None:
+        config.tasks = ["qa_state", "qa_vision", "motor_control"]
+
     print("Generating Robotics Q&A and Motor Control dataset...")
     
     token_to_id, id_to_token = build_vocabulary()
