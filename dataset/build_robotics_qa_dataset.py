@@ -30,6 +30,7 @@ class RoboticsDatasetConfig(BaseModel):
     num_test_puzzles: int = 1500
     seed: int = 42
     tasks: Optional[List[str]] = None
+    angle_bucket_size: int = 5
 
 # --- Vocabulary and Tokenization ---
 
@@ -126,7 +127,7 @@ def inverse_kinematics(l1, l2, target_x, target_y, base_x, base_y):
     
     return int(math.degrees(theta1_rad)), int(math.degrees(theta2_rad))
 
-def generate_environment(image_size: int, allowed_tasks: List[str]):
+def generate_environment(image_size: int, allowed_tasks: List[str], bucket_size: int = 5):
     if not allowed_tasks:
         raise ValueError("allowed_tasks list cannot be empty")
         
@@ -137,8 +138,9 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
     l1, l2 = image_size // 3, image_size // 3
     
     # Current joint angles
-    current_t1 = random.randint(30, 150)
-    current_t2 = random.randint(-120, 120)
+    # Snap to buckets
+    current_t1 = random.randint(30 // bucket_size, 150 // bucket_size) * bucket_size
+    current_t2 = random.randint(-120 // bucket_size, 120 // bucket_size) * bucket_size
     
     elbow_pos, hand_pos = forward_kinematics(l1, l2, current_t1, current_t2, base_x, base_y)
     
@@ -159,8 +161,8 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
                 target_t1 = current_t1
                 target_t2 = current_t2
             else:
-                target_t1 = random.randint(30, 150)
-                target_t2 = random.randint(-120, 120)
+                target_t1 = random.randint(30 // bucket_size, 150 // bucket_size) * bucket_size
+                target_t2 = random.randint(-120 // bucket_size, 120 // bucket_size) * bucket_size
             _, obj_pos = forward_kinematics(l1, l2, target_t1, target_t2, base_x, base_y)
             
             # Check overlap
@@ -351,7 +353,7 @@ def generate_dataset(config: RoboticsDatasetConfig, split: str, token_to_id: Dic
         if i % 1000 == 0:
             print(f"  Generating {split} example {i}/{num_puzzles}")
             
-        image, question, answer, solution_img = generate_environment(config.image_size, config.tasks)
+        image, question, answer, solution_img = generate_environment(config.image_size, config.tasks, config.angle_bucket_size)
         
         txt_inp = encode_text(question, token_to_id, max_len=config.max_seq_len, add_eos=False)
         lbl = encode_text(answer, token_to_id, max_len=total_seq_len, add_eos=True)
