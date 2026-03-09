@@ -334,7 +334,7 @@ def generate_environment(image_size: int, allowed_tasks: List[str], bucket_size:
                     y1 = start_y + dy * curr_dist
                     x2 = start_x + dx * next_dist
                     y2 = start_y + dy * next_dist
-                    draw.line([(x1, y1), (x2, y2)], fill=(150, 150, 150), width=1)
+                    draw.line([(x1, y1), (x2, y2)], fill=(255, 105, 180), width=2) # Hot pink color, thicker width
                     curr_dist += dash_length + space_length
             
             delta_t1 = target_obj['t1'] - current_t1
