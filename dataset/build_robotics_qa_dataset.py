@@ -337,13 +337,10 @@ def generate_environment(image_size: int, allowed_tasks: List[str], bucket_size:
                     draw.line([(x1, y1), (x2, y2)], fill=(255, 105, 180), width=2) # Hot pink color, thicker width
                     curr_dist += dash_length + space_length
             
-            delta_t1 = target_obj['t1'] - current_t1
-            delta_t2 = target_obj['t2'] - current_t2
+            target_t1 = target_obj['t1']
+            target_t2 = target_obj['t2']
             
-            dt1_str = f"+{delta_t1}" if delta_t1 >= 0 else str(delta_t1)
-            dt2_str = f"+{delta_t2}" if delta_t2 >= 0 else str(delta_t2)
-            
-            answer = f"shoulder {dt1_str} elbow {dt2_str}"
+            answer = f"shoulder {target_t1} elbow {target_t2}"
         else:
             question = "what is the shoulder angle ?"
             answer = str(current_t1)
