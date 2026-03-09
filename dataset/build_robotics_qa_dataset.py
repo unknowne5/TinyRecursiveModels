@@ -119,13 +119,25 @@ def inverse_kinematics(l1, l2, target_x, target_y, base_x, base_y):
     # Law of cosines
     cos_angle2 = (x*x + y*y - l1*l1 - l2*l2) / (2 * l1 * l2)
     cos_angle2 = max(-1.0, min(1.0, cos_angle2))
-    theta2_rad = math.acos(cos_angle2)
     
-    k1 = l1 + l2 * math.cos(theta2_rad)
-    k2 = l2 * math.sin(theta2_rad)
-    theta1_rad = math.atan2(y, x) - math.atan2(k2, k1)
+    # Two valid solutions for elbow angle (+ and -)
+    theta2_rad_1 = math.acos(cos_angle2)
+    theta2_rad_2 = -math.acos(cos_angle2)
     
-    return int(math.degrees(theta1_rad)), int(math.degrees(theta2_rad))
+    # Solution 1
+    k1_1 = l1 + l2 * math.cos(theta2_rad_1)
+    k2_1 = l2 * math.sin(theta2_rad_1)
+    theta1_rad_1 = math.atan2(y, x) - math.atan2(k2_1, k1_1)
+    
+    # Solution 2
+    k1_2 = l1 + l2 * math.cos(theta2_rad_2)
+    k2_2 = l2 * math.sin(theta2_rad_2)
+    theta1_rad_2 = math.atan2(y, x) - math.atan2(k2_2, k1_2)
+    
+    return [
+        (int(math.degrees(theta1_rad_1)), int(math.degrees(theta2_rad_1))),
+        (int(math.degrees(theta1_rad_2)), int(math.degrees(theta2_rad_2)))
+    ]
 
 def generate_environment(image_size: int, allowed_tasks: List[str], bucket_size: int = 5):
     if not allowed_tasks:
@@ -156,13 +168,40 @@ def generate_environment(image_size: int, allowed_tasks: List[str], bucket_size:
         placed = False
         attempts = 0
         while not placed and attempts < 20:
-            # For 25% of the environments, intentionally place the first object right at the hand
-            if i == 0 and random.random() < 0.25:
-                target_t1 = current_t1
-                target_t2 = current_t2
-            else:
-                target_t1 = random.randint(30 // bucket_size, 150 // bucket_size) * bucket_size
-                target_t2 = random.randint(-120 // bucket_size, 120 // bucket_size) * bucket_size
+            # Generate random target coordinates within reach
+            angle1 = random.uniform(0, math.pi)
+            radius = random.uniform(20, l1 + l2 - 5)
+            obj_x = base_x + radius * math.cos(angle1)
+            obj_y = base_y - radius * math.sin(angle1)
+            
+            ik_solutions = inverse_kinematics(l1, l2, obj_x, obj_y, base_x, base_y)
+            
+            if not ik_solutions:
+                attempts += 1
+                continue
+                
+            # Snap solutions to buckets
+            snapped_solutions = []
+            for t1, t2 in ik_solutions:
+                s_t1 = round(t1 / bucket_size) * bucket_size
+                s_t2 = round(t2 / bucket_size) * bucket_size
+                # Constrain to allowed ranges
+                s_t1 = max(30, min(150, s_t1))
+                s_t2 = max(-120, min(120, s_t2))
+                snapped_solutions.append((s_t1, s_t2))
+                
+            # Pick the shortest path solution relative to current arm
+            best_sol = None
+            min_dist = float('inf')
+            for s_t1, s_t2 in snapped_solutions:
+                dist = abs(s_t1 - current_t1) + abs(s_t2 - current_t2)
+                if dist < min_dist:
+                    min_dist = dist
+                    best_sol = (s_t1, s_t2)
+            
+            target_t1, target_t2 = best_sol
+            
+            # Recalculate true object position based on snapped angles
             _, obj_pos = forward_kinematics(l1, l2, target_t1, target_t2, base_x, base_y)
             
             # Check overlap
