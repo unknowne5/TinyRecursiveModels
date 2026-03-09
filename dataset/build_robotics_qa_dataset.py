@@ -127,6 +127,11 @@ def inverse_kinematics(l1, l2, target_x, target_y, base_x, base_y):
     return int(math.degrees(theta1_rad)), int(math.degrees(theta2_rad))
 
 def generate_environment(image_size: int, allowed_tasks: List[str]):
+    if not allowed_tasks:
+        raise ValueError("allowed_tasks list cannot be empty")
+        
+    task_type = random.choice(allowed_tasks)
+
     # Arm configuration
     base_x, base_y = image_size // 2, image_size - 10
     l1, l2 = image_size // 3, image_size // 3
@@ -139,7 +144,7 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
     
     # Generate objects
     objects = []
-    num_objects = random.randint(1, 3)
+    num_objects = 0 if task_type == "qa_state_basic" else random.randint(1, 3)
     
     # Try to place objects within reach but avoiding overlaps
     for i in range(num_objects):
@@ -207,23 +212,49 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
     draw.ellipse([int(elbow_pos[0])-4, int(elbow_pos[1])-4, int(elbow_pos[0])+4, int(elbow_pos[1])+4], fill=(128,128,128))
     draw.ellipse([int(hand_pos[0])-4, int(hand_pos[1])-4, int(hand_pos[0])+4, int(hand_pos[1])+4], fill=(255,0,0)) # red hand
     
-    image_np = np.array(img).transpose(2, 0, 1).astype(np.float32) / 255.0
-    
     target_obj_idx = None
     
-    # Generate task
-    if not allowed_tasks:
-        raise ValueError("allowed_tasks list cannot be empty")
-        
-    task_type = random.choice(allowed_tasks)
-    
-    if task_type == "qa_state":
+    if task_type in ["qa_state", "qa_state_basic"]:
         if random.random() < 0.5:
             question = "what is the shoulder angle ?"
             answer = str(current_t1)
+            
+            if task_type == "qa_state_basic":
+                # Draw arc for shoulder angle
+                r = 15
+                bbox = [base_x - r, base_y - r, base_x + r, base_y + r]
+                # Angle 0 is right, PIL draws clockwise from start to end (so 360-t1 to 360)
+                start_deg = 360 - current_t1
+                end_deg = 360
+                draw.arc(bbox, start=start_deg, end=end_deg, fill=(255, 165, 0), width=2)
+                
+                # Draw a reference line for 0 degrees (horizontal right)
+                draw.line([(base_x, base_y), (base_x + 20, base_y)], fill=(128, 128, 128), width=1)
         else:
             question = "what is the elbow angle ?"
             answer = str(current_t2)
+            
+            if task_type == "qa_state_basic":
+                # Draw arc for elbow angle
+                r = 15
+                ex, ey = int(elbow_pos[0]), int(elbow_pos[1])
+                bbox = [ex - r, ey - r, ex + r, ey + r]
+                
+                # Shoulder angle direction
+                ref_deg = 360 - current_t1
+                # Elbow angle direction
+                arm_deg = 360 - (current_t1 + current_t2)
+                
+                start_deg = min(ref_deg, arm_deg)
+                end_deg = max(ref_deg, arm_deg)
+                
+                draw.arc(bbox, start=start_deg, end=end_deg, fill=(255, 165, 0), width=2)
+                
+                # Draw a reference line extending the first arm segment
+                # Length of reference line = 20
+                ref_dx = 20 * math.cos(math.radians(current_t1))
+                ref_dy = -20 * math.sin(math.radians(current_t1))
+                draw.line([(ex, ey), (ex + ref_dx, ey + ref_dy)], fill=(128, 128, 128), width=1)
             
     elif task_type == "qa_vision":
         # Check what is at hand
@@ -256,6 +287,8 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
             question = "what is the shoulder angle ?"
             answer = str(current_t1)
             
+    image_np = np.array(img).transpose(2, 0, 1).astype(np.float32) / 255.0
+    
     # Generate solution image if needed
     solution_img = None
     if task_type == "motor_control" and target_obj_idx is not None:
@@ -390,7 +423,7 @@ def main(config: RoboticsDatasetConfig):
     random.seed(config.seed)
     
     if config.tasks is None:
-        config.tasks = ["qa_state", "qa_vision", "motor_control"]
+        config.tasks = ["qa_state_basic", "qa_state", "qa_vision", "motor_control"]
 
     print("Generating Robotics Q&A and Motor Control dataset...")
     
