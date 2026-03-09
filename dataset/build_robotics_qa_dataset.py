@@ -25,7 +25,7 @@ class RoboticsDatasetConfig(BaseModel):
     output_dir: str = "data/robotics_qa_m1"
     max_seq_len: int = 32
     image_size: int = 64
-    patch_size: int = 8
+    patch_size: int = 4
     num_train_puzzles: int = 8000
     num_test_puzzles: int = 1500
     seed: int = 42
