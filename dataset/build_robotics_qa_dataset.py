@@ -162,7 +162,7 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
             overlap = False
             for obj in objects:
                 d = math.hypot(obj_pos[0] - obj['x'], obj_pos[1] - obj['y'])
-                if d < 10:
+                if d < 15:
                     overlap = True
             
             if not overlap:
@@ -199,13 +199,13 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
             
     # Draw arm (white)
     arm_color = (255, 255, 255)
-    draw.line([(base_x, base_y), (int(elbow_pos[0]), int(elbow_pos[1]))], fill=arm_color, width=2)
-    draw.line([(int(elbow_pos[0]), int(elbow_pos[1])), (int(hand_pos[0]), int(hand_pos[1]))], fill=arm_color, width=2)
+    draw.line([(base_x, base_y), (int(elbow_pos[0]), int(elbow_pos[1]))], fill=arm_color, width=4)
+    draw.line([(int(elbow_pos[0]), int(elbow_pos[1])), (int(hand_pos[0]), int(hand_pos[1]))], fill=arm_color, width=4)
     
     # Joints
-    draw.ellipse([base_x-2, base_y-2, base_x+2, base_y+2], fill=(128,128,128))
-    draw.ellipse([int(elbow_pos[0])-2, int(elbow_pos[1])-2, int(elbow_pos[0])+2, int(elbow_pos[1])+2], fill=(128,128,128))
-    draw.ellipse([int(hand_pos[0])-2, int(hand_pos[1])-2, int(hand_pos[0])+2, int(hand_pos[1])+2], fill=(255,0,0)) # red hand
+    draw.ellipse([base_x-4, base_y-4, base_x+4, base_y+4], fill=(128,128,128))
+    draw.ellipse([int(elbow_pos[0])-4, int(elbow_pos[1])-4, int(elbow_pos[0])+4, int(elbow_pos[1])+4], fill=(128,128,128))
+    draw.ellipse([int(hand_pos[0])-4, int(hand_pos[1])-4, int(hand_pos[0])+4, int(hand_pos[1])+4], fill=(255,0,0)) # red hand
     
     image_np = np.array(img).transpose(2, 0, 1).astype(np.float32) / 255.0
     
@@ -264,7 +264,7 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
         
         # Draw objects
         for obj in objects:
-            r = 4
+            r = 6
             bbox = [obj['x']-r, obj['y']-r, obj['x']+r, obj['y']+r]
             color_rgb = COLORS[obj['color']]
             if obj['shape'] == 'square':
@@ -284,12 +284,12 @@ def generate_environment(image_size: int, allowed_tasks: List[str]):
         t_elbow_pos, t_hand_pos = forward_kinematics(l1, l2, target_t1, target_t2, base_x, base_y)
         
         arm_color = (255, 255, 255)
-        sol_draw.line([(base_x, base_y), (int(t_elbow_pos[0]), int(t_elbow_pos[1]))], fill=arm_color, width=2)
-        sol_draw.line([(int(t_elbow_pos[0]), int(t_elbow_pos[1])), (int(t_hand_pos[0]), int(t_hand_pos[1]))], fill=arm_color, width=2)
+        sol_draw.line([(base_x, base_y), (int(t_elbow_pos[0]), int(t_elbow_pos[1]))], fill=arm_color, width=4)
+        sol_draw.line([(int(t_elbow_pos[0]), int(t_elbow_pos[1])), (int(t_hand_pos[0]), int(t_hand_pos[1]))], fill=arm_color, width=4)
         
-        sol_draw.ellipse([base_x-2, base_y-2, base_x+2, base_y+2], fill=(128,128,128))
-        sol_draw.ellipse([int(t_elbow_pos[0])-2, int(t_elbow_pos[1])-2, int(t_elbow_pos[0])+2, int(t_elbow_pos[1])+2], fill=(128,128,128))
-        sol_draw.ellipse([int(t_hand_pos[0])-2, int(t_hand_pos[1])-2, int(t_hand_pos[0])+2, int(t_hand_pos[1])+2], fill=(255,0,0))
+        sol_draw.ellipse([base_x-4, base_y-4, base_x+4, base_y+4], fill=(128,128,128))
+        sol_draw.ellipse([int(t_elbow_pos[0])-4, int(t_elbow_pos[1])-4, int(t_elbow_pos[0])+4, int(t_elbow_pos[1])+4], fill=(128,128,128))
+        sol_draw.ellipse([int(t_hand_pos[0])-4, int(t_hand_pos[1])-4, int(t_hand_pos[0])+4, int(t_hand_pos[1])+4], fill=(255,0,0))
         
         solution_img = np.array(sol_img).transpose(2, 0, 1).astype(np.float32) / 255.0
 
