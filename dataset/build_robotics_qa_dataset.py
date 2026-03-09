@@ -317,6 +317,26 @@ def generate_environment(image_size: int, allowed_tasks: List[str], bucket_size:
             target_obj = objects[target_obj_idx]
             question = f"move to {target_obj['color']} {target_obj['shape']}"
             
+            # Draw dashed line from hand to target object as a path marker
+            start_x, start_y = hand_pos
+            end_x, end_y = target_obj['x'], target_obj['y']
+            dist = math.hypot(end_x - start_x, end_y - start_y)
+            dash_length = 4
+            space_length = 4
+            
+            if dist > 0:
+                dx = (end_x - start_x) / dist
+                dy = (end_y - start_y) / dist
+                curr_dist = 0
+                while curr_dist < dist:
+                    next_dist = min(curr_dist + dash_length, dist)
+                    x1 = start_x + dx * curr_dist
+                    y1 = start_y + dy * curr_dist
+                    x2 = start_x + dx * next_dist
+                    y2 = start_y + dy * next_dist
+                    draw.line([(x1, y1), (x2, y2)], fill=(150, 150, 150), width=1)
+                    curr_dist += dash_length + space_length
+            
             delta_t1 = target_obj['t1'] - current_t1
             delta_t2 = target_obj['t2'] - current_t2
             
