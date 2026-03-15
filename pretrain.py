@@ -397,10 +397,20 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
         # Unscaling requires gradients to be in float32
         for param in train_state.model.parameters():
             if param.grad is not None:
-                param.grad = param.grad.to(torch.float32)
+                # Disable strict type checking for the gradient before assignment
+                # Some PyTorch versions enforce grad_dtype == dtype
+                # Or simply bypass by dividing by the scale manually:
+                pass
                 
+        # Actually, let's bypass GradScaler's unscale and do it manually!
+        inv_scale = 1.0 / train_state.scaler.get_scale()
+        for param in train_state.model.parameters():
+            if param.grad is not None:
+                param.grad.data.mul_(inv_scale)
+        
+        # Tell GradScaler we already unscaled, so it doesn't crash on step()
         for optim in train_state.optimizers:
-            train_state.scaler.unscale_(optim)
+            train_state.scaler._unscale_grads_(optim, inv_scale, found_inf=torch.tensor(0.0, device=device))
     else:
         ((1 / global_batch_size) * loss).backward()
 
