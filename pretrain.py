@@ -615,17 +615,23 @@ def launch(hydra_config: DictConfig):
     WORLD_SIZE = 1
     CPU_PROCESS_GROUP = None
 
+    forward_dtype_str = "float32"
+    if "arch" in hydra_config and "forward_dtype" in hydra_config.arch:
+        forward_dtype_str = hydra_config.arch.forward_dtype
+    elif "arch" in hydra_config and hasattr(hydra_config.arch, "__pydantic_extra__") and "forward_dtype" in hydra_config.arch.__pydantic_extra__:
+        forward_dtype_str = hydra_config.arch.__pydantic_extra__["forward_dtype"]
+    
+    forward_dtype = getattr(torch, forward_dtype_str)
+    torch.set_default_dtype(forward_dtype)
+
     if torch.cuda.is_available():
         DEVICE = "cuda"
-        torch.set_default_dtype(torch.float32)
     elif torch.backends.mps.is_available():
         DEVICE = "mps"  # Apple Silicon
-        torch.set_default_dtype(torch.float32)
     else:
         DEVICE = "cpu"
-        torch.set_default_dtype(torch.float32)
     
-    print(f"Using device: {DEVICE}")
+    print(f"Using device: {DEVICE} with default dtype: {forward_dtype}")
 
     # Initialize distributed training if in distributed environment (e.g. torchrun)
     if "LOCAL_RANK" in os.environ:
