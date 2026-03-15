@@ -397,7 +397,7 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
         # Unscaling requires gradients to be in float32
         for param in train_state.model.parameters():
             if param.grad is not None:
-                param.grad.data = param.grad.data.to(torch.float32)
+                param.grad = param.grad.to(torch.float32)
                 
         for optim in train_state.optimizers:
             train_state.scaler.unscale_(optim)
