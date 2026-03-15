@@ -84,7 +84,7 @@ class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
                 from fla.layers.mamba2 import Mamba2
             except ImportError:
                 from fla.models.mamba2.modeling_mamba2 import Mamba2
-            self.self_attn = Mamba2(hidden_size=config.hidden_size, expand=int(config.expansion), head_dim=config.hidden_size // config.num_heads, num_heads=config.num_heads)
+            self.self_attn = Mamba2(d_model=config.hidden_size, expand=int(config.expansion), head_dim=config.hidden_size // config.num_heads, n_heads=config.num_heads)
         else:
             self.self_attn = Attention(
                 hidden_size=config.hidden_size,
