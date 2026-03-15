@@ -102,6 +102,7 @@ class TrainState:
 
     step: int
     total_steps: int
+    scaler: Optional[Any] = None
 
 
 def create_dataloader(config: PretrainConfig, split: str, rank: int, world_size: int, **kwargs):
@@ -251,6 +252,20 @@ def init_train_state(config: PretrainConfig, train_metadata: PuzzleDatasetMetada
     # Model
     model, optimizers, optimizer_lrs = create_model(config, train_metadata, rank=rank, world_size=world_size, device=device)
 
+    scaler = None
+    forward_dtype_str = getattr(config.arch, "forward_dtype", None)
+    if forward_dtype_str is None and hasattr(config.arch, "__pydantic_extra__"):
+        forward_dtype_str = config.arch.__pydantic_extra__.get("forward_dtype", "float32")
+    
+    if forward_dtype_str == "float16":
+        if device == "cuda":
+            scaler = torch.cuda.amp.GradScaler()
+        elif device == "mps":
+            try:
+                scaler = torch.amp.GradScaler("mps")
+            except:
+                pass
+
     return TrainState(
         step=0,
         total_steps=total_steps,
@@ -258,7 +273,8 @@ def init_train_state(config: PretrainConfig, train_metadata: PuzzleDatasetMetada
         model=model,
         optimizers=optimizers,
         optimizer_lrs=optimizer_lrs,
-        carry=None
+        carry=None,
+        scaler=scaler
     )
 
 
@@ -375,7 +391,12 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
                     print(f"  Inf in carry[{k}]")
         assert False, "Aborting training due to NaN/Inf loss."
 
-    ((1 / global_batch_size) * loss).backward()
+    if train_state.scaler is not None:
+        train_state.scaler.scale((1 / global_batch_size) * loss).backward()
+        for optim in train_state.optimizers:
+            train_state.scaler.unscale_(optim)
+    else:
+        ((1 / global_batch_size) * loss).backward()
 
     # Allreduce
     if world_size > 1:
@@ -393,8 +414,14 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
         for param_group in optim.param_groups:
             param_group['lr'] = lr_this_step
 
-        optim.step()
+        if train_state.scaler is not None:
+            train_state.scaler.step(optim)
+        else:
+            optim.step()
         optim.zero_grad()
+        
+    if train_state.scaler is not None:
+        train_state.scaler.update()
 
     # Reduce metrics
     if len(metrics):
