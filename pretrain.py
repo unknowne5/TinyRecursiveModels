@@ -41,6 +41,7 @@ class ArchConfig(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(extra='allow')
     name: str
     loss: LossConfig
+    use_mamba2: bool = False
 
 
 class EvaluatorConfig(pydantic.BaseModel):
@@ -131,7 +132,8 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
         vocab_size=train_metadata.vocab_size,
         seq_len=train_metadata.seq_len,
         num_puzzle_identifiers=train_metadata.num_puzzle_identifiers,
-        causal=False  # Non-autoregressive
+        causal=False,  # Non-autoregressive
+        use_mamba2=config.arch.use_mamba2
     )
 
     # Instantiate model with loss head

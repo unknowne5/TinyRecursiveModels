@@ -59,6 +59,7 @@ class TinyRecursiveReasoningModel_ACTV1Config(BaseModel):
 
     # Alexia: added
     mlp_t: bool = False # use mlp on L instead of transformer
+    use_mamba2: bool = False # use Mamba2 instead of Attention
     puzzle_emb_len: int = 16 # if non-zero, its specified to this value
     no_ACT_continue: bool =  True # No continue ACT loss, only use the sigmoid of the halt which makes much more sense
 
@@ -78,6 +79,12 @@ class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
                 hidden_size=self.config.seq_len + self.puzzle_emb_len, # L
                 expansion=config.expansion,
             )
+        elif getattr(self.config, 'use_mamba2', False):
+            try:
+                from fla.layers.mamba2 import Mamba2
+            except ImportError:
+                from fla.models.mamba2.modeling_mamba2 import Mamba2
+            self.self_attn = Mamba2(d_model=config.hidden_size)
         else:
             self.self_attn = Attention(
                 hidden_size=config.hidden_size,
@@ -102,7 +109,13 @@ class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
             hidden_states = hidden_states.transpose(1,2)
         else:
             # Self Attention
-            hidden_states = rms_norm(hidden_states + self.self_attn(cos_sin=cos_sin, hidden_states=hidden_states), variance_epsilon=self.norm_eps)
+            if getattr(self.config, 'use_mamba2', False):
+                attn_out = self.self_attn(hidden_states)
+                if isinstance(attn_out, tuple):
+                    attn_out = attn_out[0]
+                hidden_states = rms_norm(hidden_states + attn_out, variance_epsilon=self.norm_eps)
+            else:
+                hidden_states = rms_norm(hidden_states + self.self_attn(cos_sin=cos_sin, hidden_states=hidden_states), variance_epsilon=self.norm_eps)
         # Fully Connected
         out = self.mlp(hidden_states)
         hidden_states = rms_norm(hidden_states + out, variance_epsilon=self.norm_eps)
