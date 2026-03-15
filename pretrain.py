@@ -59,7 +59,6 @@ class PretrainConfig(pydantic.BaseModel):
 
     # Hyperparams
     global_batch_size: int
-    gradient_accumulation_steps: int = 1
     epochs: int
 
     lr: float
@@ -348,8 +347,7 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
             train_state.carry = train_state.model.initial_carry(batch)  # type: ignore
 
     # Forward
-    with torch.autocast(device_type=device, dtype=torch.bfloat16):
-        train_state.carry, loss, metrics, _, _ = train_state.model(carry=train_state.carry, batch=batch, return_keys=[])
+    train_state.carry, loss, metrics, _, _ = train_state.model(carry=train_state.carry, batch=batch, return_keys=[])
 
     # DEBUG: Check for NaN/Inf in forward pass
     if torch.isnan(loss) or torch.isinf(loss):
@@ -377,28 +375,26 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
                     print(f"  Inf in carry[{k}]")
         assert False, "Aborting training due to NaN/Inf loss."
 
-    loss_scale = 1.0 / (global_batch_size * getattr(config, 'gradient_accumulation_steps', 1))
-    (loss_scale * loss).backward()
+    ((1 / global_batch_size) * loss).backward()
 
-    # Allreduce and Optimizer step if accumulation done
-    lr_this_step = compute_lr(train_state.optimizer_lrs[0], config, train_state)
-    if train_state.step % getattr(config, 'gradient_accumulation_steps', 1) == 0:
-        if world_size > 1:
-            for param in train_state.model.parameters():
-                if param.grad is not None:
-                    dist.all_reduce(param.grad)
-                
-        # Apply optimizer
-        torch.nn.utils.clip_grad_norm_(train_state.model.parameters(), max_norm=1.0)
+    # Allreduce
+    if world_size > 1:
+        for param in train_state.model.parameters():
+            if param.grad is not None:
+                dist.all_reduce(param.grad)
+            
+    # Apply optimizer
+    lr_this_step = None    
+    torch.nn.utils.clip_grad_norm_(train_state.model.parameters(), max_norm=1.0)
 
-        for optim, base_lr in zip(train_state.optimizers, train_state.optimizer_lrs):
-            lr_this_step = compute_lr(base_lr, config, train_state)
-            # print(f'Setting optimizer lr to {lr_this_step} at step {train_state.step}')
-            for param_group in optim.param_groups:
-                param_group['lr'] = lr_this_step
+    for optim, base_lr in zip(train_state.optimizers, train_state.optimizer_lrs):
+        lr_this_step = compute_lr(base_lr, config, train_state)
+        # print(f'Setting optimizer lr to {lr_this_step} at step {train_state.step}')
+        for param_group in optim.param_groups:
+            param_group['lr'] = lr_this_step
 
-            optim.step()
-            optim.zero_grad()
+        optim.step()
+        optim.zero_grad()
 
     # Reduce metrics
     if len(metrics):
