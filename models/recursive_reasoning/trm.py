@@ -67,6 +67,10 @@ class TinyRecursiveReasoningModel_ACTV1Config(BaseModel):
     image_channels: int = 3
     patch_size: int = 16
 
+    # Regularization & Optimization
+    dropout: float = 0.0
+    tie_weights: bool = False
+
 class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
     def __init__(self, config: TinyRecursiveReasoningModel_ACTV1Config) -> None:
         super().__init__()
@@ -105,6 +109,8 @@ class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
             hidden_states = rms_norm(hidden_states + self.self_attn(cos_sin=cos_sin, hidden_states=hidden_states), variance_epsilon=self.norm_eps)
         # Fully Connected
         out = self.mlp(hidden_states)
+        if self.config.dropout > 0:
+            out = F.dropout(out, p=self.config.dropout, training=self.training)
         hidden_states = rms_norm(hidden_states + out, variance_epsilon=self.norm_eps)
         return hidden_states
 
@@ -136,6 +142,9 @@ class TinyRecursiveReasoningModel_ACTV1_Inner(nn.Module):
             
         self.embed_tokens = CastedEmbedding(self.config.vocab_size, self.config.hidden_size, init_std=embed_init_std, cast_to=self.forward_dtype)
         self.lm_head      = CastedLinear(self.config.hidden_size, self.config.vocab_size, bias=False)
+        if self.config.tie_weights:
+            self.lm_head.weight = self.embed_tokens.embedding_weight
+            
         self.q_head       = CastedLinear(self.config.hidden_size, 2, bias=True)
 
         self.puzzle_emb_len = -(self.config.puzzle_emb_ndim // -self.config.hidden_size)  if self.config.puzzle_emb_len == 0 else self.config.puzzle_emb_len  # ceil div
@@ -183,6 +192,9 @@ class TinyRecursiveReasoningModel_ACTV1_Inner(nn.Module):
                 embedding = img_embedding
         else:
             embedding = self.embed_tokens(input.to(torch.int32))
+
+        if self.config.dropout > 0:
+            embedding = F.dropout(embedding, p=self.config.dropout, training=self.training)
 
         # Puzzle embeddings
         if self.config.puzzle_emb_ndim > 0:
