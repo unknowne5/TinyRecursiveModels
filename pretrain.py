@@ -102,7 +102,6 @@ class TrainState:
 
     step: int
     total_steps: int
-    scaler: Optional[Any] = None
 
 
 def create_dataloader(config: PretrainConfig, split: str, rank: int, world_size: int, **kwargs):
@@ -252,20 +251,6 @@ def init_train_state(config: PretrainConfig, train_metadata: PuzzleDatasetMetada
     # Model
     model, optimizers, optimizer_lrs = create_model(config, train_metadata, rank=rank, world_size=world_size, device=device)
 
-    scaler = None
-    forward_dtype_str = getattr(config.arch, "forward_dtype", None)
-    if forward_dtype_str is None and hasattr(config.arch, "__pydantic_extra__"):
-        forward_dtype_str = config.arch.__pydantic_extra__.get("forward_dtype", "float32")
-    
-    if forward_dtype_str == "float16":
-        if device == "cuda":
-            scaler = torch.cuda.amp.GradScaler()
-        elif device == "mps":
-            try:
-                scaler = torch.amp.GradScaler("mps")
-            except:
-                pass
-
     return TrainState(
         step=0,
         total_steps=total_steps,
@@ -273,8 +258,7 @@ def init_train_state(config: PretrainConfig, train_metadata: PuzzleDatasetMetada
         model=model,
         optimizers=optimizers,
         optimizer_lrs=optimizer_lrs,
-        carry=None,
-        scaler=scaler
+        carry=None
     )
 
 
@@ -391,39 +375,7 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
                     print(f"  Inf in carry[{k}]")
         assert False, "Aborting training due to NaN/Inf loss."
 
-    if train_state.scaler is not None:
-        train_state.scaler.scale((1 / global_batch_size) * loss).backward()
-        
-        # We use the internal _unscale_grads_ method natively, explicitly allowing FP16
-        # and checking for infs/nans properly so that the scaler adjusts the scale!
-        inv_scale = train_state.scaler._scale.double().pow(-1).float()
-        for optim in train_state.optimizers:
-            if id(optim) not in train_state.scaler._per_optimizer_states:
-                train_state.scaler._per_optimizer_states[id(optim)] = {}
-                
-            try:
-                from torch.amp.grad_scaler import OptState
-            except ImportError:
-                from torch.cuda.amp.grad_scaler import OptState
-                
-            optimizer_state = train_state.scaler._per_optimizer_states[id(optim)]
-            if optimizer_state.get("stage", None) is OptState.UNSCALED:
-                continue
-
-            # Must explicitly use float32 for found_inf as required by PyTorch
-            found_inf = torch.full((1,), 0.0, dtype=torch.float32, device=device)
-            
-            try:
-                # PyTorch 2.x requires allow_fp16 parameter
-                found_inf_per_device = train_state.scaler._unscale_grads_(optim, inv_scale, found_inf, True)
-            except TypeError:
-                # Fallback for PyTorch 1.x which doesn't have allow_fp16
-                found_inf_per_device = train_state.scaler._unscale_grads_(optim, inv_scale, found_inf)
-                
-            optimizer_state["found_inf_per_device"] = found_inf_per_device
-            optimizer_state["stage"] = OptState.UNSCALED
-    else:
-        ((1 / global_batch_size) * loss).backward()
+    ((1 / global_batch_size) * loss).backward()
 
     # Allreduce
     if world_size > 1:
@@ -441,14 +393,8 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
         for param_group in optim.param_groups:
             param_group['lr'] = lr_this_step
 
-        if train_state.scaler is not None:
-            train_state.scaler.step(optim)
-        else:
-            optim.step()
+        optim.step()
         optim.zero_grad()
-        
-    if train_state.scaler is not None:
-        train_state.scaler.update()
 
     # Reduce metrics
     if len(metrics):
@@ -669,23 +615,17 @@ def launch(hydra_config: DictConfig):
     WORLD_SIZE = 1
     CPU_PROCESS_GROUP = None
 
-    forward_dtype_str = "float32"
-    if "arch" in hydra_config and "forward_dtype" in hydra_config.arch:
-        forward_dtype_str = hydra_config.arch.forward_dtype
-    elif "arch" in hydra_config and hasattr(hydra_config.arch, "__pydantic_extra__") and "forward_dtype" in hydra_config.arch.__pydantic_extra__:
-        forward_dtype_str = hydra_config.arch.__pydantic_extra__["forward_dtype"]
-    
-    forward_dtype = getattr(torch, forward_dtype_str)
-    torch.set_default_dtype(forward_dtype)
-
     if torch.cuda.is_available():
         DEVICE = "cuda"
+        torch.set_default_dtype(torch.float32)
     elif torch.backends.mps.is_available():
         DEVICE = "mps"  # Apple Silicon
+        torch.set_default_dtype(torch.float32)
     else:
         DEVICE = "cpu"
+        torch.set_default_dtype(torch.float32)
     
-    print(f"Using device: {DEVICE} with default dtype: {forward_dtype}")
+    print(f"Using device: {DEVICE}")
 
     # Initialize distributed training if in distributed environment (e.g. torchrun)
     if "LOCAL_RANK" in os.environ:
