@@ -92,7 +92,6 @@ class PretrainConfig(pydantic.BaseModel):
     ema_rate: float = 0.999 # EMA-rate
     freeze_weights: bool = False # If True, freeze weights and only learn the embeddings
     use_wandb: bool = False
-    use_mamba: bool = False
 
 @dataclass
 class TrainState:
@@ -132,7 +131,6 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
         vocab_size=train_metadata.vocab_size,
         seq_len=train_metadata.seq_len,
         num_puzzle_identifiers=train_metadata.num_puzzle_identifiers,
-        use_mamba=getattr(config, 'use_mamba', False) or (config.arch.__pydantic_extra__ or {}).get('use_mamba', False),
         causal=False  # Non-autoregressive
     )
 

@@ -7,13 +7,6 @@ import torch.nn.functional as F
 from torch import nn
 from pydantic import BaseModel
 import random
-try:
-    from mamba_ssm import Mamba2 as Mamba
-except ImportError:
-    try:
-        from mamba_ssm import Mamba
-    except ImportError:
-        Mamba = None
 from models.common import trunc_normal_init_
 from models.layers import rms_norm, LinearSwish, SwiGLU, Attention, RotaryEmbedding, CosSin, CastedEmbedding, CastedLinear
 from models.sparse_embedding import CastedSparseEmbedding
@@ -74,8 +67,6 @@ class TinyRecursiveReasoningModel_ACTV1Config(BaseModel):
     image_channels: int = 3
     patch_size: int = 16
 
-    use_mamba: bool = False
-
 class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
     def __init__(self, config: TinyRecursiveReasoningModel_ACTV1Config) -> None:
         super().__init__()
@@ -86,15 +77,6 @@ class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
             self.mlp_t = SwiGLU(
                 hidden_size=self.config.seq_len + self.puzzle_emb_len, # L
                 expansion=config.expansion,
-            )
-        elif getattr(self.config, 'use_mamba', False):
-            if Mamba is None:
-                raise ImportError("mamba_ssm is not installed. Please install it to use Mamba attention.")
-            self.self_attn = Mamba(
-                d_model=config.hidden_size,
-                d_state=16,
-                d_conv=4,
-                expand=2,
             )
         else:
             self.self_attn = Attention(
@@ -118,9 +100,6 @@ class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
             out = self.mlp_t(hidden_states)
             hidden_states = rms_norm(hidden_states + out, variance_epsilon=self.norm_eps)
             hidden_states = hidden_states.transpose(1,2)
-        elif getattr(self.config, 'use_mamba', False):
-            # Mamba
-            hidden_states = rms_norm(hidden_states + self.self_attn(hidden_states), variance_epsilon=self.norm_eps)
         else:
             # Self Attention
             hidden_states = rms_norm(hidden_states + self.self_attn(cos_sin=cos_sin, hidden_states=hidden_states), variance_epsilon=self.norm_eps)
