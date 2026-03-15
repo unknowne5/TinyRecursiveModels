@@ -394,30 +394,34 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
     if train_state.scaler is not None:
         train_state.scaler.scale((1 / global_batch_size) * loss).backward()
         
-        # We manually unscale the gradients to bypass PyTorch's strict FP16 checks
-        inv_scale = 1.0 / train_state.scaler.get_scale()
-        for param in train_state.model.parameters():
-            if param.grad is not None:
-                param.grad.data.mul_(inv_scale)
-        
-        # Trick GradScaler into thinking gradients are already unscaled safely
-        # We must avoid calling _unscale_grads_ directly due to varying signature in PyTorch versions
+        # We use the internal _unscale_grads_ method natively, explicitly allowing FP16
+        # and checking for infs/nans properly so that the scaler adjusts the scale!
+        inv_scale = train_state.scaler._scale.double().pow(-1).float()
         for optim in train_state.optimizers:
-            # We directly modify the state dictionary instead of calling internal methods
             if id(optim) not in train_state.scaler._per_optimizer_states:
                 train_state.scaler._per_optimizer_states[id(optim)] = {}
-            
-            # Use fallback import for OptState to ensure compatibility
+                
             try:
                 from torch.amp.grad_scaler import OptState
             except ImportError:
                 from torch.cuda.amp.grad_scaler import OptState
                 
-            train_state.scaler._per_optimizer_states[id(optim)]["stage"] = OptState.UNSCALED
-            # We must also set found_inf_per_device to prevent step() from skipping
-            train_state.scaler._per_optimizer_states[id(optim)]["found_inf_per_device"] = {
-                device: torch.tensor([0.0], device=device)
-            }
+            optimizer_state = train_state.scaler._per_optimizer_states[id(optim)]
+            if optimizer_state.get("stage", None) is OptState.UNSCALED:
+                continue
+
+            # Must explicitly use float32 for found_inf as required by PyTorch
+            found_inf = torch.full((1,), 0.0, dtype=torch.float32, device=device)
+            
+            try:
+                # PyTorch 2.x requires allow_fp16 parameter
+                found_inf_per_device = train_state.scaler._unscale_grads_(optim, inv_scale, found_inf, True)
+            except TypeError:
+                # Fallback for PyTorch 1.x which doesn't have allow_fp16
+                found_inf_per_device = train_state.scaler._unscale_grads_(optim, inv_scale, found_inf)
+                
+            optimizer_state["found_inf_per_device"] = found_inf_per_device
+            optimizer_state["stage"] = OptState.UNSCALED
     else:
         ((1 / global_batch_size) * loss).backward()
 
